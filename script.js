@@ -1,19 +1,14 @@
+import { counties } from "./modules/counties.js"
+import { data } from "./modules/data.js"
+import { formatDate } from "./modules/formatDate.js"
+
 const yearInput = document.querySelector('#year-search')
 const countySelect = document.querySelector('#county-select')
 const countyTimelineHeader = document.querySelector('#county-timeline-header')
 const countyTimelineList = document.querySelector('#county-timeline-list')
 const countyListItem = document.querySelectorAll('.county-list-item')
+data.county = counties[0].id
 
-const formatDate = (date) => {
-    let formattedDate = new Date(date).getFullYear();
-    let results = ''
-    if (formattedDate) {
-        results = formattedDate
-    } else {
-        results = date[0].toUpperCase() + date.slice(1)
-    }
-    return results;
-}
 
 // loop to create items in the volume select
 for (let i = 0; i < counties.length; i++) {
@@ -23,66 +18,47 @@ for (let i = 0; i < counties.length; i++) {
     countySelect.append(countySelectOption)
 }
 
-let updatedYear = ''
-// grab value of year input and update ^
-const yearValueCapture = (input) => {
-    if (input.value.length == 0) {
-        updatedYear = input.value;
-    } else if (input.value > 0 && input.value < 2024) {
-        updatedYear = parseInt(input.value);
+// year input event listner
+yearInput.addEventListener('keyup', () => {
+    const currentYear = new Date().getFullYear()
+    if (yearInput.value.length == 0) {
+        data.year = yearInput.value;
+    } else if (yearInput.value > 0 && yearInput.value <= currentYear) {
+        data.year = parseInt(yearInput.value);
     } else {
-        updatedYear = 'null'
+        data.year = 'null'
     }
-    
-    addCountyPeriodItems(updatedYear)
-}
-console.log( updatedYear)
-// event listener for county select
+    addCountyPeriodItems()
+})
+
+// county select listener
 countySelect.addEventListener('change', () => {
-
-    addCountyPeriodItems(updatedYear)
-
+    data.county = countySelect.value 
+    yearInput.value = ''
+     data.year = yearInput.value
+    addCountyPeriodItems()
 })
 
 // add items to ul timeline
-const addCountyPeriodItems = (year) => {
-    console.log(updatedYear, typeof updatedYear)
+const addCountyPeriodItems = () => {
     countyTimelineHeader.innerText = `${countySelect.value} timeline:`
     const currCounty = counties.filter(x => x.id === countySelect.value)[0]
-    const countyPeriods = currCounty.periods
+    data.countyArr = currCounty.periods
     countyTimelineList.innerText = ''
-    for (let i = 0; i < countyPeriods.length; i++) {
-        let begDate = formatDate(countyPeriods[i][0])
-        
-        let endDate = formatDate(countyPeriods[i][1])
-        let countyName = countyPeriods[i][2]
+    for (let i = 0; i < data.countyArr.length; i++) {
+        let begDate = formatDate(data.countyArr[i][0])
+        let endDate = formatDate(data.countyArr[i][1])
+        let countyName = data.countyArr[i][2]
         const countyListItem = document.createElement('li')
         countyListItem.classList.add('county-list-item')
         countyListItem.innerText = `${begDate} - ${endDate} - ${countyName}`
-
-        if (updatedYear !== 'null' && updatedYear == '' || begDate <= updatedYear && endDate >= updatedYear || begDate == 'Ancestral Period' && endDate >= updatedYear || begDate <= updatedYear && endDate == 'Today') {
+        if (data.year !== 'null' && data.year == '' || begDate <= data.year && endDate >= data.year || begDate == 'Ancestral Period' && endDate >= data.year || begDate <= data.year && endDate == 'Today') {
             // console.log('successfule')
             countyTimelineList.append(countyListItem)
         } else {
             countyListItem.innerText = ''
-            // console.log('else just ran')
         }
     }
 }
 
-document.querySelectorAll('.county-list-item').forEach(items => {
-    console.log(items.innerText)
-})
-
-
 addCountyPeriodItems()
-
-
-
-
-
-
-
-
-
-
