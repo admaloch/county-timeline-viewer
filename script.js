@@ -1,16 +1,16 @@
 import { counties } from "./modules/counties.js"
 import { data } from "./modules/data.js"
-import { formatDate } from "./modules/formatDate.js"
+import { changeMapImage } from "./modules/changeMapImage.js"
+import { mapDatesArr } from "./modules/mapArray.js"
+import { addThumbImages } from "./imgCarousel.js"
+import { addCountyPeriodItems } from "./modules/addCountyPeriodItems.js"
 
 const yearInput = document.querySelector('#year-search')
 const countySelect = document.querySelector('#county-select')
-const countyTimelineHeader = document.querySelector('#county-timeline-header')
-const countyTimelineList = document.querySelector('#county-timeline-list')
-const countyListItem = document.querySelectorAll('.county-list-item')
+
 data.county = counties[0].id
 
-
-// loop to create items in the volume select
+// loop to create items in the search by county select
 for (let i = 0; i < counties.length; i++) {
     const countySelectOption = document.createElement('option')
     countySelectOption.innerText = counties[i].id
@@ -18,47 +18,48 @@ for (let i = 0; i < counties.length; i++) {
     countySelect.append(countySelectOption)
 }
 
-// year input event listner
-yearInput.addEventListener('keyup', () => {
-    const currentYear = new Date().getFullYear()
-    if (yearInput.value.length == 0) {
-        data.year = yearInput.value;
-    } else if (yearInput.value > 0 && yearInput.value <= currentYear) {
-        data.year = parseInt(yearInput.value);
-    } else {
-        data.year = 'null'
-    }
-    addCountyPeriodItems()
-})
-
-// county select listener
+// event listener for search by county on change
 countySelect.addEventListener('change', () => {
-    data.county = countySelect.value 
+    data.county = countySelect.value
     yearInput.value = ''
-     data.year = yearInput.value
+    data.year = yearInput.value
     addCountyPeriodItems()
+    console.log(data.county)
 })
 
-// add items to ul timeline
-const addCountyPeriodItems = () => {
-    countyTimelineHeader.innerText = `${countySelect.value} timeline:`
-    const currCounty = counties.filter(x => x.id === countySelect.value)[0]
-    data.countyArr = currCounty.periods
-    countyTimelineList.innerText = ''
-    for (let i = 0; i < data.countyArr.length; i++) {
-        let begDate = formatDate(data.countyArr[i][0])
-        let endDate = formatDate(data.countyArr[i][1])
-        let countyName = data.countyArr[i][2]
-        const countyListItem = document.createElement('li')
-        countyListItem.classList.add('county-list-item')
-        countyListItem.innerText = `${begDate} - ${endDate} - ${countyName}`
-        if (data.year !== 'null' && data.year == '' || begDate <= data.year && endDate >= data.year || begDate == 'Ancestral Period' && endDate >= data.year || begDate <= data.year && endDate == 'Today') {
-            // console.log('successfule')
-            countyTimelineList.append(countyListItem)
+// event listener for narrow by year input
+let timer;
+yearInput.addEventListener('keyup', function (e) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+        const currentYear = new Date().getFullYear()
+        if (yearInput.value.length == 0) {
+            data.year = yearInput.value;
+        } else if (yearInput.value > 0 && yearInput.value <= currentYear) {
+            data.year = parseInt(yearInput.value);
         } else {
-            countyListItem.innerText = ''
+            data.year = 'null'
         }
-    }
-}
+        addCountyPeriodItems()
+        let yearInputNumber = parseInt(yearInput.value)
+        let yearIndex = mapDatesArr.findIndex(x => x >= yearInputNumber)
+        console.log(yearIndex)
+        addThumbImages(yearIndex)
+        let activeImg = document.querySelector('.active-img')
+        changeMapImage(activeImg)
+    }, 1000);
+});
+
+
+// grab current county selected for interactive mapster plugin map
+document.querySelectorAll('area').forEach(county => {
+    county.addEventListener('click', () => {
+        data.county = county.alt.replace('County', '').trim()
+        $("#county-select").selectpicker('val', data.county)
+        addCountyPeriodItems()
+    })
+})
+
+
 
 addCountyPeriodItems()

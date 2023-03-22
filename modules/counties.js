@@ -1,4 +1,4 @@
- export const counties = [
+export const counties = [
      {
         "id": "Escambia",
         "periods": [["Ancestral Period", "1513-04-02", ""],
