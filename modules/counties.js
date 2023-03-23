@@ -1,3 +1,5 @@
+// temporary data used for testing purposes -- info still being compiled for rest of counties
+
 export const counties = [
      {
         "id": "Escambia",

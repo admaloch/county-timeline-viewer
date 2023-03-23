@@ -30,7 +30,7 @@
                 integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg=="
                 crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="https://cdn.jsdelivr.net/npm/imagemapster@1.5.4/dist/jquery.imagemapster.min.js"></script>
-
+        <script src="/openseadragon/openseadragon.min.js"></script>
         <!-- main style sheets-->
         <link rel="stylesheet" href="./css/imageCarousel.css">
         <link rel="stylesheet" href="./css/style.css">
@@ -383,47 +383,9 @@
                                 <div
                                         class="col-8 map-slider-container d-flex flex-column justify-content-center align-items-center">
                                         <!-- image carousel -->
-                                        <div class=" col-12  d-flex justify-content-center align-items-center  ">
-                                                <!-- img carousel -->
-                                                <div
-                                                        class="carousel-container mb-2 d-flex justify-content-center align-items-center ">
-                                                        <div id="image-carousel" class="carousel slide"
-                                                                data-ride="carousel">
-                                                                <div class="carousel-inner carousel-image">
-                                                                        <div class="carousel-item active">
-                                                                                <a id="new-img-link"
-                                                                                        href="https://www.floridamemory.com/FMP/maps/large/fmc0001.jpg"
-                                                                                        target="_blank">
-                                                                                        <img src="https://www.floridamemory.com/FMP/maps/large/fmc0001.jpg"
-                                                                                                id="new-img-src"
-                                                                                                class="d-block  img-fluid full-img"
-                                                                                                alt="">
-                                                                                </a>
-                                                                        </div>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                        </div>
+                                        
 
-                                        <div
-                                                class="col-12 thumbnail-container d-flex justify-content-around align-items-center">
-                                                <div
-                                                        class="thumb-content d-flex flex-row justify-content-center align-items-center">
-                                                        <div id="prev-thumb-arrow" class="thumb-arrows col-1"><i
-                                                                        class="fa fa-arrow-left thumb-icons prev-thumb-icon"></i>
-                                                        </div>
-                                                        <div
-                                                                class="thumb-img-container col-10 d-flex justify-content-around align-items-center">
-                                                                <div class="img-thumb-container">
-
-                                                                        <div></div>
-                                                                </div>
-                                                        </div>
-                                                        <div id="next-thumb-arrow" class="thumb-arrows col-1"><i
-                                                                        class="fa fa-arrow-right thumb-icons next-thumb-icon"></i>
-                                                        </div>
-                                                </div>
-                                        </div>
+                                        <div class="col-12" id="openseadragon1" style="width: 575px; height: 425px;"></div>
 
 
 
@@ -436,7 +398,8 @@
         <!-- js files -->
         <!-- main js file -->
         <script src="./imageMapster.js"></script>
-        <script type="module" src="imgCarousel.js"></script>
+        <!-- <script type="module" src="imgCarousel.js"></script> -->
+        <script type="module" src="openSeaViewer.js"></script>
         <script type="module" src="script.js"></script>
 </body>
 
