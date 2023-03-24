@@ -1,13 +1,15 @@
 import { counties } from "./modules/counties.js"
 import { data } from "./modules/data.js"
 import { changeMapImage } from "./modules/changeMapImage.js"
-import { mapDatesArr, imgAltArr } from "./modules/mapArray.js"
+import { mapDatesArr, imgAltArr } from "./modules/mapData.js"
 import { addThumbImages } from "./imgCarousel.js"
 import { addCountyPeriodItems } from "./modules/addCountyPeriodItems.js"
-import { coords } from "./modules/coords.js";
+import { viewerFunc } from "./modules/openSeaMapViewer.js"
+import { updateHighlightedCounty } from "./imageMapster.js"
 
 const yearInput = document.querySelector('#year-search')
 const countySelect = document.querySelector('#county-select')
+
 
 data.county = counties[0].id
 
@@ -21,71 +23,57 @@ for (let i = 0; i < counties.length; i++) {
 
 // event listener for search by county on change
 countySelect.addEventListener('change', () => {
+    console.log(countySelect.selectedIndex)
     data.county = countySelect.value
     yearInput.value = ''
     data.year = yearInput.value
     addCountyPeriodItems()
-    console.log(data.county)
+    viewerFunc(0, 5000, 3700)
+    updateHighlightedCounty(data.county)
 })
 
-// initialize open sea dragon  map 
-var viewer = OpenSeadragon({
-    id: "openseadragon1",
-    showNavigator: true,
-    prefixUrl: "/openseadragon/images/",
-    tileSources: [
-        {
-            type: "legacy-image-pyramid",
-            levels: [
-                {
-                    url: "https://www.floridamemory.com/FMP/maps/small/fmc0001.jpg",
-                    width: 1000,
-                    height: 733
-                },
-                {
-                    url: "https://www.floridamemory.com/FMP/maps/medium/fmc0001.jpg",
-                    width: 2500,
-                    height: 1832
-                },
-                {
-                    url: "https://www.floridamemory.com/FMP/maps/large/fmc0001.jpg",
-                    width: 4962,
-                    height: 3636
-                }
-            ]
+// grab current county selected for interactive mapster plugin map
+document.querySelectorAll('area').forEach(county => {
+    county.addEventListener('click', () => {
+        data.county = county.alt.replace('County', '').trim()
+        $("#county-select").selectpicker('val', data.county)
+
+        addCountyPeriodItems()
+        viewerFunc(0, 5000, 3700)
+        copySelectionsToHiddenField()
+
+    })
+
+})
+
+// interactive map arrows event listener - change county to next on list
+document.querySelectorAll('.map-arrows').forEach(arrow => {
+    arrow.addEventListener('click', () => {
+        if (arrow.id === 'prev-map-arrow') {
+            countySelect.selectedIndex--
+        } else {
+            countySelect.selectedIndex++
         }
-    ]
-});
-//full = 5000, 3700
-// zoom img size = 600, 655
-const viewerFunc = (yearIndex, width, height) => {
-    var tiledImage = viewer.world.getItemAt(0);
-    var imageRect = new OpenSeadragon.Rect(coords[yearIndex].x, coords[yearIndex].y, width, height);
-    var viewportRect = tiledImage.imageToViewportRectangle(imageRect);
-    viewer.viewport.fitBounds(viewportRect, true);
-   
-}
-
-
-
-
+        data.county = countySelect.value
+        $('.selectpicker').selectpicker('refresh')
+        updateHighlightedCounty(data.county)
+        addCountyPeriodItems()
+    })
+})
 
 
 
 // event listener for narrow by year input
 let timer;
 yearInput.addEventListener('keyup', function (e) {
+    e.preventDefault()
     clearTimeout(timer);
 
     timer = setTimeout(() => {
         const currentYear = new Date().getFullYear()
-
-
-
-
         if (yearInput.value.length == 0) {
             data.year = yearInput.value;
-        } else if (yearInput.value > 0 && yearInput.value <= currentYear) {
+        } else if (yearInput.value >= 0 && yearInput.value <= currentYear) {
             data.year = parseInt(yearInput.value);
 
         } else {
@@ -93,20 +81,25 @@ yearInput.addEventListener('keyup', function (e) {
         }
         addCountyPeriodItems()
         let yearInputNumber = parseInt(yearInput.value)
-        console.log(`year input number is ${yearInputNumber}`)
-        let yearIndex = mapDatesArr.findIndex(x => x >= yearInputNumber)
-        console.log(`year index is ${yearIndex}`)
-        if (yearIndex === -1) {
+        let yearIndex = 0
+        if (yearInputNumber >= 0 && yearInputNumber <= currentYear) {
+            for (let i = 0; i < mapDatesArr.length; i++) {
+                if (yearInputNumber >= mapDatesArr[i])
+                    yearIndex = i;
+            }
+            if (yearInputNumber >= 0 && yearInputNumber <= 1820) {
+                yearIndex = 1
+            }
+        } else {
+            console.log('invalid number')
+        }
+
+        if (!yearIndex) {
             viewerFunc(0, 5000, 3700)
             // console.log('empty year', yearIndex)
         } else {
             viewerFunc(yearIndex, 600, 655)
-            // console.log('successful year', yearIndex)
         }
-
-
-
-
         // addThumbImages(yearIndex)
         // let activeImg = document.querySelector('.active-img')
         // changeMapImage(activeImg)
@@ -115,14 +108,7 @@ yearInput.addEventListener('keyup', function (e) {
 });
 
 
-// grab current county selected for interactive mapster plugin map
-document.querySelectorAll('area').forEach(county => {
-    county.addEventListener('click', () => {
-        data.county = county.alt.replace('County', '').trim()
-        $("#county-select").selectpicker('val', data.county)
-        addCountyPeriodItems()
-    })
-})
+
 
 addCountyPeriodItems()
 

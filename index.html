@@ -57,7 +57,7 @@
                                 <div id="prev-map-arrow"
                                         class="map-arrows col-2 d-flex flex-column justify-content-center align-items-center">
                                         <div class=" map-arrow-text text-center">Previous </div>
-                                        <div class=" map-arrow-text text-center"> county</div>
+                                        <div class=" map-arrow-text text-center"> County</div>
                                         <div class=" arrow-icon-container text-center">
                                                 <i class="fa fa-arrow-left prev-map-icon"></i>
                                         </div>
@@ -77,7 +77,7 @@
 
 
                                                 <map id="wpa_map" name="wpa_map">
-                                                        <area class="items" county="escambia" shape="poly"
+                                                        <area class="items highlighted" county="escambia" shape="poly"
                                                                 coords="27,12,41,9,39,29,52,59,48,67,53,74,47,85,34,87,25,87,23,78,28,54,18,39,18,22"
                                                                 href="#" alt="Escambia County">
 
@@ -322,9 +322,7 @@
                                                         <area county="monroe" shape="poly"
                                                                 coords="467,451,531,451,531,508,523,515,506,511,500,496,496,490,496,473"
                                                                 href="#" alt="Monroe County">
-                                                        <area county="monroe" shape="poly"
-                                                                coords="564,536,560,531,575,508,576,498,578,487,580,486,580,506,565,540,542,563,522,573,445,588,421,588,424,584,457,582,515,570,538,561"
-                                                                href="#" alt="Monroe County">
+
 
                                                         <area county="dade" shape="poly"
                                                                 coords="533,437,589,436,590,462,581,479,557,504,546,507,532,509"
@@ -351,8 +349,9 @@
                                 </div>
                                 <div id="next-map-arrow"
                                         class="map-arrows col-2 d-flex flex-column justify-content-center align-items-center">
+
                                         <div class=" map-arrow-text text-center">Next </div>
-                                        <div class=" map-arrow-text text-center"> county</div>
+                                        <div class=" map-arrow-text text-center">County</div>
                                         <div class="col-12 arrow-icon-container text-center">
                                                 <i class="fa fa-arrow-right prev-map-icon"></i>
                                         </div>
@@ -375,17 +374,19 @@
                         <!-- time line and img map slider -->
                         <div class="row border-top-0 year-content d-flex  justify-content-center align-items-center">
                                 <!-- timeline -->
-                                <div class="col-4  county-timeline d-flex flex-column">
-                                        <h2 class="col-12" id="county-timeline-header">Escambia Timeline</h2>
-                                        <ul class="col-12" id="county-timeline-list"></ul>
+                                <div class="col-4     ">
+                                        <div class="border county-timeline text-center">
+                                                <h2 class="col-12" id="county-timeline-header">Escambia Timeline</h2>
+                                                <ul class="col-12" id="county-timeline-list"></ul>
+                                        </div>
                                 </div>
                                 <!-- image carousel and slider thumbnails -->
                                 <div
                                         class="col-8 map-slider-container d-flex flex-column justify-content-center align-items-center">
                                         <!-- image carousel -->
-                                        
 
-                                        <div class="col-12" id="openseadragon1" style="width: 575px; height: 425px;"></div>
+
+                                        <div class="col-12" id="openseadragon1"></div>
 
 
 
@@ -397,9 +398,9 @@
 
         <!-- js files -->
         <!-- main js file -->
-        <script src="./imageMapster.js"></script>
+        <script type="module" src="./imageMapster.js"></script>
         <!-- <script type="module" src="imgCarousel.js"></script> -->
-        <script type="module" src="openSeaViewer.js"></script>
+
         <script type="module" src="script.js"></script>
 </body>
 

@@ -1,4 +1,4 @@
-import { mapDatesArr, imgAltArr } from "./modules/mapArray.js"
+import { mapDatesArr, imgAltArr } from "./modules/mapData.js"
 import { changeMapImage } from "./modules/changeMapImage.js"
 
 let imgIndex = 0

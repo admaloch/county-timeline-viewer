@@ -9,10 +9,28 @@
     padding: 1rem;
 
 } 
+#county-timeline-list {
+    width: auto;
+}
 
-/* .col-12 {
-    border: yellow solid 2px;
-} */
+#county-timeline-list{
+    list-style-type: none 
+}
+
+
+
+.map-arrows {
+    cursor: pointer;
+    
+    padding: 10px 30px;
+    transition: .3s;
+    
+    width: 65px;
+}
+
+.map-arrows:hover {
+    background-color: lightgrey;
+}
 
 .temporary-map {
     width: 700px;
@@ -23,5 +41,7 @@
 }
 
 #openseadragon1 {
-    border: red solid 2px;
+    border: black solid 5px;
+    width: 100%; 
+    aspect-ratio: 23/17;
 }

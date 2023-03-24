@@ -2,7 +2,6 @@
 let image = $('#wpa_clickmap');
 
 // build area data from areas
-
 let areas = $.map($('area[alt]'), function (el) {
     return {
         key: $(el).attr('county'),
@@ -13,6 +12,7 @@ let areas = $.map($('area[alt]'), function (el) {
 function copySelectionsToHiddenField() {
     $('#selectedKeys').val(image.mapster('get'));
 }
+
 
 
 image.mapster({
@@ -34,6 +34,18 @@ image.mapster({
     }
 });
 
+$('area.highlighted').mapster('set', true);
+
+// updates highlighted area on map based on change of county value
+export const updateHighlightedCounty = (county) => {
+    $("#wpa_map area").removeClass("highlighted");
+    document.querySelectorAll('area').forEach(x => {
+        if (x.alt.split(' ')[0].toLowerCase() === county.toLowerCase()) {
+            x.classList.add('highlighted')
+            $('area.highlighted').mapster('set', true);
+        }
+    })
+}
 
 
 
