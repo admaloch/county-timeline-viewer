@@ -1,12 +1,13 @@
 import { formatDate } from "./formatDate.js"
 import { counties } from "./counties.js"
 import { data } from "./data.js"
-
+import { mapDatesArr } from "./mapData.js"
 
 const countyTimeline = document.querySelector('.county-timeline')
 const countyTimelineHeader = document.querySelector('#county-timeline-header')
 const countyTimelineList = document.querySelector('#county-timeline-list')
 const countySelect = document.querySelector('#county-select')
+const yearInput = document.querySelector('#year-search')
 
 // add items to ul timeline
 export const addCountyPeriodItems = () => {
@@ -29,7 +30,14 @@ export const addCountyPeriodItems = () => {
             countyListItem.innerText = ''
         }
     }
-    $(".county-timeline").fadeIn(2000);
+    $(".county-timeline").fadeIn(1000);
    
 
+}
+
+export const updateCountyTimeline = (id) =>{
+    let currDate = parseInt(mapDatesArr[id].slice(0, 4))
+    yearInput.value = currDate
+    data.year = yearInput.value
+    addCountyPeriodItems()
 }

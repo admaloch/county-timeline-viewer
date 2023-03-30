@@ -13,7 +13,6 @@ export const addThumbImages = (yearIndex) => {
         thumbContain.innerHTML = `
         <div class="thumb-map-img map-${thumbArr[i] + 1}"
             id = "${thumbArr[i] + 1}"
-            
             title="${imgAltArr[thumbArr[i] + 1]}">
         </div>
         <div class="thumb-text">${mapDatesArr[thumbArr[i] + 1]}</div>

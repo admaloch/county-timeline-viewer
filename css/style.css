@@ -65,8 +65,12 @@
     height: 130px;
     cursor: pointer;
     aspect-ratio: 12/13;
-
+    transition: opacity 350ms ease-in-out;
     background-image: url("https://www.floridamemory.com/FMP/maps/small/fmc0001.jpg");
+}
+
+.thumb-map-img:hover {
+    opacity: 1;
 }
 
 .active-img {
