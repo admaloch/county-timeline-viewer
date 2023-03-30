@@ -1,6 +1,6 @@
 # county-timeline-viewer
 
-This is a project I'm currently working on as an addition to the Florida Memory website. It is a tool that will allow a user to search any modern county in the State of Florida and see a rough timeline of how it has changed overtime. The results correspond with a series of maps that show how these counties have changed since statehood. The user will be able to narrow results by a specific date to see what their county was and view a map to see what it looked like at that specified date.
+This is a project I'm currently working on as an addition to the Florida Memory website. It is a tool that will allow a user to search any modern county and view a timeline and a series of maps that show how these counties have changed since statehood. 
 
 Some of the tools used include Image Mapster which is an html image mapper, and Open Sea Dragon which is a powerful image viewer.
 
