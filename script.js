@@ -87,7 +87,7 @@ yearInput.addEventListener('keyup', function (e) {
         } else {
             data.year = 'null'
         }
-        addCountyPeriodItems()
+        
         let yearInputNumber = parseInt(yearInput.value)
         if (yearInputNumber >= 1820 && yearInputNumber <= currentYear) {
             for (let i = 0; i < mapDatesArr.length; i++) {
@@ -98,17 +98,15 @@ yearInput.addEventListener('keyup', function (e) {
         } else {
             yearIndex = 0
         }
-        console.log(yearIndex)
+        addCountyPeriodItems()
         openSeaViewerFunc(yearIndex)
-        // addThumbImages(yearIndex)
         addThumbImages(yearIndex -1)
         if(yearInputNumber >= 1820 && yearInputNumber <= currentYear) {
            document.querySelectorAll('.thumb-map-img')[0].classList.add('active-img') 
            document.querySelector('.active-img').nextElementSibling.classList.add('d-none')
         }
-        
         testMapCarouselArrow()
-        
+        changeActiveImg()
     }, 1000);
 });
 
@@ -140,8 +138,9 @@ document.querySelectorAll('.thumb-arrows').forEach(arrow => {
 })
 
 
-
+// openSeaViewerFunc(yearIndex)
 addThumbImages(yearIndex)
 addCountyPeriodItems()
 changeActiveImg()
 testMapCarouselArrow()
+

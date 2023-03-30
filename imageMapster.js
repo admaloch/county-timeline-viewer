@@ -38,6 +38,7 @@ $('area.highlighted').mapster('set', true);
 
 // updates highlighted area on map based on change of county value
 export const updateHighlightedCounty = (county) => {
+    $(".highlighted").css("display", "none");
     $("#wpa_map area").removeClass("highlighted");
     document.querySelectorAll('area').forEach(x => {
         if (x.alt.split(' ')[0].toLowerCase() === county.toLowerCase()) {
@@ -45,6 +46,7 @@ export const updateHighlightedCounty = (county) => {
             $('area.highlighted').mapster('set', true);
         }
     })
+    $(".highlighted").fadeIn(2000)
 }
 
 

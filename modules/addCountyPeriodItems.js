@@ -2,12 +2,15 @@ import { formatDate } from "./formatDate.js"
 import { counties } from "./counties.js"
 import { data } from "./data.js"
 
+
+const countyTimeline = document.querySelector('.county-timeline')
 const countyTimelineHeader = document.querySelector('#county-timeline-header')
 const countyTimelineList = document.querySelector('#county-timeline-list')
 const countySelect = document.querySelector('#county-select')
 
 // add items to ul timeline
 export const addCountyPeriodItems = () => {
+    countyTimeline.style.display = 'none'
     countyTimelineHeader.innerText = `${countySelect.value} timeline:`
     const currCounty = counties.filter(x => x.id === countySelect.value)[0]
 
@@ -26,5 +29,7 @@ export const addCountyPeriodItems = () => {
             countyListItem.innerText = ''
         }
     }
+    $(".county-timeline").fadeIn(2000);
+   
 
 }

@@ -1,30 +1,35 @@
 .content-container {
     width: 100%;
     /* border: red solid 2px; */
-} 
+}
 
 .row {
     width: 100%;
     border: black solid 2px;
     padding: 1rem;
 
-} 
+}
+
+/* .county-timeline {
+    display: none;
+} */
+
 #county-timeline-list {
     width: auto;
 }
 
-#county-timeline-list{
-    list-style-type: none 
+#county-timeline-list {
+    list-style-type: none
 }
 
 
 
 .map-arrows {
     cursor: pointer;
-    
+
     padding: 10px 30px;
     transition: .3s;
-    
+
     width: 65px;
 }
 
@@ -42,7 +47,7 @@
 
 .main-map {
     border: black solid 5px;
-    width: 100%; 
+    width: 100%;
     aspect-ratio: 23/17;
 }
 
@@ -54,7 +59,7 @@
 
 
 
-  .thumb-map-img {
+.thumb-map-img {
     opacity: .5;
     width: 130px;
     height: 130px;
@@ -75,9 +80,9 @@
     /* bottom: 63px; */
     opacity: .3;
     color: black;
-   background-color: #dad7cd;
+    /* background-color: #dad7cd; */
     pointer-events: none;
- 
+
 }
 
 .map-1 {

@@ -56,10 +56,11 @@ var viewer = OpenSeadragon({
 });
 
 
-
+const mainOpenSeaDragon = document.querySelector('.openseadragon-container')
 
 // open sea dragon function to change map zoom cords based on 'narrow by year' input
 export const openSeaViewerFunc = (yearIndex) => {
+    mainOpenSeaDragon.style.display = 'none'
     var tiledImage = viewer.world.getItemAt(0);
     let x = mapCoords[yearIndex].x
     let y = mapCoords[yearIndex].y
@@ -68,21 +69,6 @@ export const openSeaViewerFunc = (yearIndex) => {
     var imageRect = new OpenSeadragon.Rect(x, y, w, h);
     var viewportRect = tiledImage.imageToViewportRectangle(imageRect);
     viewer.viewport.fitBounds(viewportRect, true);
+    $(".openseadragon-container").fadeIn(1000);
 }
 
-// viewer.addHandler('open', function () {
-//     for (var i = 0; i <= 21; i++) {
-//         var tiledImage = viewer.world.getItemAt(0);
-//         var imageRect = new OpenSeadragon.Rect(mapCoords[i].x, mapCoords[i].y, mapCoords[i].w, mapCoords[i].h);
-//         var viewportRect = tiledImage.imageToViewportRectangle(imageRect);
-//         viewer.viewport.fitBounds(viewportRect, true);
-//     }
-// })
-
-// viewer.addHandler('page', function (event) {
-//     var i = event.page;
-//     var tiledImage = viewer.world.getItemAt(i);
-//     var imageRect = new OpenSeadragon.Rect(mapCoords[i].x, mapCoords[i].y, mapCoords[i].w, mapCoords[i].h);
-//     var viewportRect = tiledImage.imageToViewportRectangle(imageRect);
-//     viewer.viewport.fitBounds(viewportRect, true);
-// });
