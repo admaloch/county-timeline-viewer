@@ -4,9 +4,9 @@ This is a project I'm currently working on as an addition to the Florida Memory 
 
 Some of the tools used include Image Mapster which is an html image mapper, and Open Sea Dragon which is a powerful image viewer.
 
-Note -- These maps are typically used by historians as a guide and are often requested by researchers. They mainly offer a general look into florida and how it's changed since statehood. They do not go into specific detail and do not directly correspond with or capture the full history of every county or event and should be used as a guide and not a comprehensive tool. 
+Note -- These maps are typically used by historians as a guide and are often requested by researchers. They mainly offer a general look into florida and how it's changed overtime. They do not go into specific detail and do not directly correspond with or capture the full history of every county or event and should be used as a guide and not a comprehensive tool. 
 
 Here is a live link for your convenience:
 https://admaloch.github.io/county-timeline-viewer/
 
-Note: There is a cors protection policy preventing certain features from showing up in the live link.
+Note: Certain features are not loading properly in the live link, but work when run on a live server. This is a bug that is currently being sorted out. 
