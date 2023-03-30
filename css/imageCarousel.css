@@ -50,7 +50,9 @@
     transform: scale(1.3)
 }
 
-.thumb-icons {
+
+
+.prev-thumb-icon, .next-thumb-icon {
     opacity: .5;
     border: 1px solid black;
     padding: 8px;
@@ -58,7 +60,7 @@
     transition: all .3s ease-in-out;
 }
 
-.thumb-icons:hover {
+.prev-thumb-icon:hover, .next-thumb-icon:hover {
     opacity: 1;
     cursor: pointer;
 }
@@ -67,7 +69,10 @@
     width: 66px;
 }
 
-
+.delete-icon, .delete-icon:hover {
+    opacity: 0;
+    cursor: default;
+}
 
 
 @media screen and (max-width: 992px) {
@@ -219,3 +224,4 @@
 .map-21 {
     background-position: 97.5% 61.35%;
 }
+

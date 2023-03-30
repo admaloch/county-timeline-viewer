@@ -21,7 +21,6 @@ export const addCountyPeriodItems = () => {
         countyListItem.innerText = `${begDate} - ${endDate} - ${countyName}`
 
         if (data.year !== 'null' && data.year == '' || begDate <= data.year && endDate >= data.year || begDate == 'Ancestral Period' && endDate >= data.year || begDate <= data.year && endDate == 'Today') {
-            // console.log('successfule')
             countyTimelineList.append(countyListItem)
         } else {
             countyListItem.innerText = ''
