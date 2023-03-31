@@ -23,10 +23,11 @@ export const addThumbImages = (yearIndex) => {
     
 }
 
+const imgNum = 5
 // create array of inputted index + next 4
 const genThumbArray = (yearIndex) => {
     let thumbArr = []
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < imgNum; i++) {
         thumbArr.push(yearIndex)
         yearIndex++
     }

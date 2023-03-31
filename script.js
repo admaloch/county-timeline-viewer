@@ -13,6 +13,11 @@ const countySelect = document.querySelector('#county-select')
 data.county = counties[0].id
 
 let yearIndex = 0
+
+$(function() {
+	$('[data-toggle="popover"]').popover()
+})
+
 // loop to create items in the search by county select
 for (let i = 0; i < counties.length; i++) {
     const countySelectOption = document.createElement('option')
@@ -34,6 +39,7 @@ countySelect.addEventListener('change', () => {
     yearIndex = 0
     addThumbImages(yearIndex)
     changeActiveImg()
+    window.scrollBy(0, 600);
 })
 
 // grab current county selected for interactive mapster plugin map
@@ -49,6 +55,7 @@ document.querySelectorAll('area').forEach(county => {
         yearIndex = 0
         addThumbImages(yearIndex)
         changeActiveImg()
+        window.scrollBy(0, 600);
     })
 })
 
@@ -70,6 +77,7 @@ document.querySelectorAll('.map-arrows').forEach(arrow => {
         yearIndex = 0
         addThumbImages(yearIndex)
         changeActiveImg()
+        window.scrollBy(0, 600);
     })
 })
 
@@ -82,11 +90,12 @@ yearInput.addEventListener('keyup', function (e) {
         const currentYear = new Date().getFullYear()
         if (yearInput.value.length == 0) {
             data.year = yearInput.value;
-        } else if (yearInput.value >= 0 && yearInput.value <= currentYear) {
+        } else if (yearInput.value > 0 && yearInput.value <= currentYear) {
             data.year = parseInt(yearInput.value);
+            window.scrollBy(0, 700);
 
         } else {
-            data.year = 'null'
+            data.year = 0
         }
         let yearInputNumber = parseInt(yearInput.value)
         if (yearInputNumber >= 1820 && yearInputNumber <= currentYear) {
@@ -106,6 +115,7 @@ yearInput.addEventListener('keyup', function (e) {
         }
         testMapCarouselArrow()
         changeActiveImg()
+        
     }, 1000);
 });
 

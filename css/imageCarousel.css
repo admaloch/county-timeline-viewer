@@ -15,11 +15,7 @@
     width: 100%;
 }
 
-.thumb-content {
-    width: 100%;
-    height: auto;
 
-}
 
 .thumb-text {
     position: relative;
@@ -125,9 +121,9 @@
     }
 
 }
-
+/* 
 .carousel-container img {
-    width: 700px;
+    
     aspect-ratio: 11/12;
     object-fit: contain;
 
@@ -224,4 +220,4 @@
 .map-21 {
     background-position: 97.5% 61.35%;
 }
-
+ */
