@@ -1,11 +1,11 @@
 import { mapDatesArr, imgAltArr } from "./mapData.js"
 
 // create map thumbnail image
-export const addThumbImages = (yearIndex) => {
+export const addThumbImages = (yearIndex, imgNum) => {
     const thumbMapContainer = document.querySelector('.thumb-img-container')
     thumbMapContainer.style.display = 'none'
 
-    const thumbArr = genThumbArray(yearIndex)
+    const thumbArr = genThumbArray(yearIndex, imgNum)
 
     thumbMapContainer.innerHTML = ''
     for (let i = 0; i < thumbArr.length; i++) {
@@ -24,9 +24,9 @@ export const addThumbImages = (yearIndex) => {
     $(".thumb-img-container").fadeIn(1000);
 }
 
-const imgNum = 5
+
 // create array of inputted index + next 4
-const genThumbArray = (yearIndex) => {
+const genThumbArray = (yearIndex, imgNum) => {
     let thumbArr = []
     for (let i = 0; i < imgNum; i++) {
         thumbArr.push(yearIndex)
@@ -37,3 +37,5 @@ const genThumbArray = (yearIndex) => {
     thumbArr = thumbArr.filter(arr => arr >= 0)
     return thumbArr
 }
+
+

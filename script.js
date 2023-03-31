@@ -6,6 +6,7 @@ import { openSeaViewerFunc } from "./modules/openSeaMapViewer.js"
 import { updateHighlightedCounty } from "./imageMapster.js"
 import { testMapCarouselArrow } from "./modules/testMapCarouselArrow.js"
 import { addThumbImages } from "./modules/addThumbImages.js"
+
 // import { changeActiveImg } from "./modules/changeActiveImg.js"
 
 const yearInput = document.querySelector('#year-search')
@@ -18,6 +19,23 @@ $(function () {
     $('[data-toggle="popover"]').popover()
 })
 
+let imgNum = 4;
+
+function changeImgNum() {
+
+    if ($(window).width() > 1200) {
+        imgNum = 5
+    }
+    else {
+        imgNum = 4
+    }
+}
+$(window).on("resize", changeImgNum);
+
+
+
+
+
 // loop to create items in the search by county select
 for (let i = 0; i < counties.length; i++) {
     const countySelectOption = document.createElement('option')
@@ -29,19 +47,20 @@ for (let i = 0; i < counties.length; i++) {
 // event listener for search by county on change
 countySelect.addEventListener('change', () => {
     data.county = countySelect.value
-    
+
     yearInput.value = ''
     data.year = yearInput.value
     addCountyPeriodItems()
     openSeaViewerFunc(0)
     updateHighlightedCounty(data.county)
     yearIndex = 0
-    addThumbImages(yearIndex)
+    addThumbImages(yearIndex, imgNum)
     changeActiveImg()
-    setTimeout(() => {
-        window.scrollBy(0, 600);
-    }, 500);
+    // document.getElementById('year-container').scrollIntoView();
+    // setTimeout(() => {window.scrollBy(0, 850);}, 500);
+    $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 700);
 })
+
 
 // grab current county selected for interactive mapster plugin map
 document.querySelectorAll('area').forEach(county => {
@@ -54,10 +73,12 @@ document.querySelectorAll('area').forEach(county => {
         openSeaViewerFunc(0)
         // copySelectionsToHiddenField()
         yearIndex = 0
-        addThumbImages(yearIndex)
+        addThumbImages(yearIndex, imgNum)
         changeActiveImg()
-        setTimeout(() => window.scrollBy(0, 600), 500);
+        // setTimeout(() => window.scrollBy(0, 850), 500);
+        $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 700);
     })
+
 })
 
 // interactive map arrows event listener - change county to next on list
@@ -76,9 +97,10 @@ document.querySelectorAll('.map-arrows').forEach(arrow => {
         addCountyPeriodItems()
         openSeaViewerFunc(0)
         yearIndex = 0
-        addThumbImages(yearIndex)
+        addThumbImages(yearIndex, imgNum)
         changeActiveImg()
-        setTimeout(() => window.scrollBy(0, 600), 500);
+        // setTimeout(() => window.scrollBy(0, 850), 500);
+        $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 700);
     })
 })
 
@@ -93,7 +115,7 @@ yearInput.addEventListener('keyup', function (e) {
             data.year = yearInput.value;
         } else if (yearInput.value > 0 && yearInput.value <= currentYear) {
             data.year = parseInt(yearInput.value);
-            setTimeout(() => window.scrollBy(0, 700), 300);
+            $('html, body').animate({ scrollTop: $("#county-timeline-header").offset().top }, 700);
 
         } else {
             data.year = 0
@@ -109,7 +131,7 @@ yearInput.addEventListener('keyup', function (e) {
         }
         addCountyPeriodItems()
         openSeaViewerFunc(yearIndex)
-        addThumbImages(yearIndex - 1)
+        addThumbImages(yearIndex - 1, imgNum)
         if (yearInputNumber >= 1820 && yearInputNumber <= currentYear) {
             document.querySelectorAll('.thumb-map-img')[0].classList.add('active-img')
             document.querySelector('.active-img').nextElementSibling.classList.add('d-none')
@@ -121,13 +143,13 @@ yearInput.addEventListener('keyup', function (e) {
 });
 
 document.querySelector('#reset-results-btn').addEventListener('click', () => {
-    
+
     yearInput.value = ''
     data.year = yearInput.value
     addCountyPeriodItems()
     openSeaViewerFunc(0)
     yearIndex = 0
-    addThumbImages(yearIndex)
+    addThumbImages(yearIndex, imgNum)
     changeActiveImg()
 })
 
@@ -160,10 +182,10 @@ document.querySelectorAll('.thumb-arrows').forEach(arrow => {
         const thumbImages = document.querySelectorAll('.thumb-map-img')
         if (arrow.id === 'next-thumb-arrow' && thumbImages[thumbImages.length - 1].id !== '21') {
             yearIndex += 5
-            addThumbImages(yearIndex)
+            addThumbImages(yearIndex, imgNum)
         } if (arrow.id === 'prev-thumb-arrow' && thumbImages[0].id !== '1') {
             yearIndex -= 5
-            addThumbImages(yearIndex)
+            addThumbImages(yearIndex, imgNum)
         }
         document.querySelectorAll('.thumb-map-img')[0].classList.add('active-img')
         changeActiveImg()
@@ -174,13 +196,25 @@ document.querySelectorAll('.thumb-arrows').forEach(arrow => {
         let currId = document.querySelectorAll('.thumb-map-img')[0].id
         updateCountyTimeline(currId)
         clickDisabled = true;
-        setTimeout(function () { clickDisabled = false; }, 500);
+        // setTimeout(function () { clickDisabled = false; }, 500);
+    })
+})
+
+document.querySelectorAll('.nav-arrows').forEach(arrow => {
+    arrow.addEventListener('click', () => {
+        if (arrow.id === 'nav-to-county') {
+            $('html, body').animate({ scrollTop: $(".county-title-container").offset().top }, 700);
+        } if (arrow.id === 'nav-to-map') {
+            $('html, body').animate({ scrollTop: $("#county-timeline-header").offset().top }, 700);
+        } if (arrow.id === 'nav-to-search') {
+            $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 700);
+        }
     })
 })
 
 
 // openSeaViewerFunc(yearIndex)
-addThumbImages(yearIndex)
+addThumbImages(yearIndex, imgNum)
 addCountyPeriodItems()
 changeActiveImg()
 testMapCarouselArrow()
