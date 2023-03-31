@@ -46,7 +46,7 @@ export const updateHighlightedCounty = (county) => {
             $('area.highlighted').mapster('set', true);
         }
     })
-    $(".highlighted").fadeIn(2000)
+
 }
 
 

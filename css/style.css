@@ -55,9 +55,9 @@ box-shadow: 0px 0px 44px 2px rgba(0,0,0,0.12);
     font-size: 1.2em;
 }
 
-.map-slider-container {
 
-    padding: 75px 0px;
+.year-search-popup {
+    margin-left: .5em;
 }
 
 
@@ -90,6 +90,8 @@ box-shadow: 0px 0px 44px 2px rgba(0,0,0,0.12);
 
 .map-slider-container {
     width: 100%;
+    margin-bottom: 5em;
+    
 }
 
 .main-map {
@@ -99,6 +101,11 @@ box-shadow: 0px 0px 44px 2px rgba(0,0,0,0.12);
     aspect-ratio: 23/17;
     -webkit-box-shadow: 0px 0px 58px 2px rgba(0,0,0,0.15); 
     box-shadow: 0px 0px 58px 2px rgba(0,0,0,0.15);
+}
+
+.map-info-popup {
+    position: relative;
+    right: 18.5em;
 }
 
 

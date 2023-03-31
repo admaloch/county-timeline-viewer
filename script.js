@@ -14,8 +14,8 @@ data.county = counties[0].id
 
 let yearIndex = 0
 
-$(function() {
-	$('[data-toggle="popover"]').popover()
+$(function () {
+    $('[data-toggle="popover"]').popover()
 })
 
 // loop to create items in the search by county select
@@ -29,8 +29,7 @@ for (let i = 0; i < counties.length; i++) {
 // event listener for search by county on change
 countySelect.addEventListener('change', () => {
     data.county = countySelect.value
-    yearInput.value = ''
-    data.year = yearInput.value
+    
     yearInput.value = ''
     data.year = yearInput.value
     addCountyPeriodItems()
@@ -39,7 +38,9 @@ countySelect.addEventListener('change', () => {
     yearIndex = 0
     addThumbImages(yearIndex)
     changeActiveImg()
-    window.scrollBy(0, 600);
+    setTimeout(() => {
+        window.scrollBy(0, 600);
+    }, 500);
 })
 
 // grab current county selected for interactive mapster plugin map
@@ -55,7 +56,7 @@ document.querySelectorAll('area').forEach(county => {
         yearIndex = 0
         addThumbImages(yearIndex)
         changeActiveImg()
-        window.scrollBy(0, 600);
+        setTimeout(() => window.scrollBy(0, 600), 500);
     })
 })
 
@@ -77,7 +78,7 @@ document.querySelectorAll('.map-arrows').forEach(arrow => {
         yearIndex = 0
         addThumbImages(yearIndex)
         changeActiveImg()
-        window.scrollBy(0, 600);
+        setTimeout(() => window.scrollBy(0, 600), 500);
     })
 })
 
@@ -92,7 +93,7 @@ yearInput.addEventListener('keyup', function (e) {
             data.year = yearInput.value;
         } else if (yearInput.value > 0 && yearInput.value <= currentYear) {
             data.year = parseInt(yearInput.value);
-            window.scrollBy(0, 700);
+            setTimeout(() => window.scrollBy(0, 700), 300);
 
         } else {
             data.year = 0
@@ -115,9 +116,20 @@ yearInput.addEventListener('keyup', function (e) {
         }
         testMapCarouselArrow()
         changeActiveImg()
-        
+
     }, 1000);
 });
+
+document.querySelector('#reset-results-btn').addEventListener('click', () => {
+    
+    yearInput.value = ''
+    data.year = yearInput.value
+    addCountyPeriodItems()
+    openSeaViewerFunc(0)
+    yearIndex = 0
+    addThumbImages(yearIndex)
+    changeActiveImg()
+})
 
 // event listner for clicking a map thumbnail 
 const changeActiveImg = () => {
@@ -130,10 +142,10 @@ const changeActiveImg = () => {
             })
             img.classList.add('active-img')
             img.nextElementSibling.classList.add('d-none')
-            console.log(img)
+
             openSeaViewerFunc(img.id)
             let currId = img.id
-           updateCountyTimeline(currId)
+            updateCountyTimeline(currId)
         })
     })
 }
@@ -160,7 +172,7 @@ document.querySelectorAll('.thumb-arrows').forEach(arrow => {
         currActiveImg.nextElementSibling.classList.add('d-none')
         openSeaViewerFunc(currActiveImg.id)
         let currId = document.querySelectorAll('.thumb-map-img')[0].id
-       updateCountyTimeline(currId)
+        updateCountyTimeline(currId)
         clickDisabled = true;
         setTimeout(function () { clickDisabled = false; }, 500);
     })
