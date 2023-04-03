@@ -204,10 +204,12 @@ document.querySelectorAll('.thumb-arrows').forEach(arrow => {
 document.querySelectorAll('.nav-arrows').forEach(arrow => {
     arrow.addEventListener('click', () => {
         if (arrow.id === 'nav-to-county') {
-            $('html, body').animate({ scrollTop: $(".county-title-container").offset().top }, 300);
-        } else {
-            $('html, body').animate({ scrollTop: $("#county-timeline-header").offset().top }, 300);
-        } 
+            $('html, body').animate({ scrollTop: $(".county-title-container").offset().top }, 700);
+        } if (arrow.id === 'nav-to-map') {
+            $('html, body').animate({ scrollTop: $("#county-timeline-header").offset().top }, 700);
+        } if (arrow.id === 'nav-to-search') {
+            $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 700);
+        }
     })
 })
 
