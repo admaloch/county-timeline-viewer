@@ -69,6 +69,6 @@ export const openSeaViewerFunc = (yearIndex) => {
     var imageRect = new OpenSeadragon.Rect(x, y, w, h);
     var viewportRect = tiledImage.imageToViewportRectangle(imageRect);
     viewer.viewport.fitBounds(viewportRect, true);
-    $(".openseadragon-container").fadeIn(1000);
+    $(".openseadragon-container").fadeIn(1600);
 }
 

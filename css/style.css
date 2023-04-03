@@ -244,38 +244,32 @@
 }
 
 .year-container {
-    position: absolute;
-    width: 65%;
-    padding: 80px 0px;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    padding: 50px 0px;
     z-index: 100;
     background-color: white;
-    top: 560px;
+    top: 150px;
     -webkit-box-shadow: 0px 0px 44px 2px rgba(0, 0, 0, 0.12);
     box-shadow: 0px 0px 44px 2px rgba(0, 0, 0, 0.12);
     border-radius: 50%;
 }
 
-.interactive-map-container {
+/* .interactive-map-container {
     margin-bottom: 5em
-}
+} */
 
-@media (min-width: 776px) {.interactive-map-container {margin-bottom: 7em}}
+/* @media (min-width: 776px) {.interactive-map-container {margin-bottom: 7em}}
 @media (min-width: 992px) {.interactive-map-container {margin-bottom: 10em}}
-@media (min-width: 1200px) {.interactive-map-container {margin-bottom: 13em}}
+@media (min-width: 1200px) {.interactive-map-container {margin-bottom: 13em}} */
 
 
-@media (min-width: 400px) {.year-container {top: 560px; width: 57%;}}
-@media (min-width: 450px) {.year-container {top: 590px; width: 55%;}}
-@media (min-width: 500px) {.year-container {top: 785px; width: 45%;}}
-@media (min-width: 576px) {.year-container {top: 830px; width: 40%;}}
-@media (min-width: 776px) {.year-container {top: 865px; width: 35%;}}
-@media (min-width: 993px) {.year-container {top: 1190px; width: 40%; height: 400px;}}
-@media (min-width: 1100px) {.year-container {top: 1190px; width: 37%; height: 400px;}}
-@media (min-width: 1200px) {.year-container {top: 1225px; width: 37%; height: 425px;}}
-@media (min-width: 1300px) {.year-container {top: 1225px; width: 34%; height: 425px;}}
-@media (min-width: 1450px) {.year-container {top: 1225px; width: 30%; height: 425px;}}
-@media (min-width: 1450px) {.year-container {top: 1225px; width: 28%; height: 425px;}}
-@media (min-width: 1750px) {.year-container {top: 1225px; width: 23%; height: 425px;}}
+@media (min-width: 451px) {.year-container {top: 175px; width: 250px ;height: 250px;}} 
+@media (min-width: 576px) {.year-container {top: 210px; width: 250px ;height: 250px;}} 
+@media (min-width: 768px) {.year-container {top: 260px; width: 350px ;height: 350px;}} 
+@media (min-width: 1200px) {.year-container {top: 300px; width: 450px ;height: 450px;}} 
+
 
 
 

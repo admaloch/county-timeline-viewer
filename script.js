@@ -128,13 +128,13 @@ yearInput.addEventListener('keyup', function (e) {
         }
         testMapCarouselArrow()
         changeActiveImg()
-        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
-            var viewportmeta = document.querySelector('meta[name="viewport"]');
-            if (viewportmeta) {
-                viewportmeta.setAttribute('content', 'width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0');
-                viewportmeta.setAttribute('content', 'width=device-width, minimum-scale=1.0, initial-scale=1.0');
-            }
-        }
+        // if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+        //     var viewportmeta = document.querySelector('meta[name="viewport"]');
+        //     if (viewportmeta) {
+        //         viewportmeta.setAttribute('content', 'width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0');
+        //         viewportmeta.setAttribute('content', 'width=device-width, minimum-scale=1.0, initial-scale=1.0');
+        //     }
+        // }
     }, 1000);
 });
 
@@ -209,8 +209,9 @@ document.querySelectorAll('.nav-arrows').forEach(arrow => {
 })
 
 addCountyPeriodItems()
-// openSeaViewerFunc(yearIndex)
+
 setTimeout(() => {
+    openSeaViewerFunc(yearIndex)
     addThumbImages(yearIndex, imgNum)
     changeActiveImg()
 }, 100);
