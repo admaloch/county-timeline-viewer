@@ -7,6 +7,14 @@ import { updateHighlightedCounty } from "./imageMapster.js"
 import { testMapCarouselArrow } from "./modules/testMapCarouselArrow.js"
 import { addThumbImages } from "./modules/addThumbImages.js"
 
+let greeting = 'hello'
+let name = 'Brock'
+let lastName = 'Johnson'
+
+let sentence = `${greeting} my name is ${name} ${lastName}!!`
+
+console.log(sentence)
+
 const yearInput = document.querySelector('#year-search')
 const countySelect = document.querySelector('#county-select')
 data.county = counties[0].id
@@ -119,7 +127,7 @@ yearInput.addEventListener('keyup', function (e) {
         } else {
             yearIndex = 0
         }
-        addCountyPeriodItems()
+        
         openSeaViewerFunc(yearIndex)
         addThumbImages(yearIndex - 1, imgNum)
         if (yearInputNumber >= 1820 && yearInputNumber <= currentYear) {
@@ -128,13 +136,8 @@ yearInput.addEventListener('keyup', function (e) {
         }
         testMapCarouselArrow()
         changeActiveImg()
-        // if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
-        //     var viewportmeta = document.querySelector('meta[name="viewport"]');
-        //     if (viewportmeta) {
-        //         viewportmeta.setAttribute('content', 'width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0');
-        //         viewportmeta.setAttribute('content', 'width=device-width, minimum-scale=1.0, initial-scale=1.0');
-        //     }
-        // }
+        addCountyPeriodItems()
+       
     }, 1000);
 });
 
@@ -209,7 +212,7 @@ document.querySelectorAll('.nav-arrows').forEach(arrow => {
 })
 
 addCountyPeriodItems()
-
+// openSeaViewerFunc(yearIndex)
 setTimeout(() => {
     openSeaViewerFunc(yearIndex)
     addThumbImages(yearIndex, imgNum)

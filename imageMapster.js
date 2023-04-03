@@ -74,7 +74,7 @@ function resize() {
     }
 
     else {
-        $('img').mapster('resize', 600, null);
+        $('img').mapster('resize', 900, null);
     }
 }
 $(window).on("resize", resize);

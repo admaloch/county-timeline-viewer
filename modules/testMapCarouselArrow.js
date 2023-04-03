@@ -1,3 +1,4 @@
+// remove arrows for prev/next if none
 export const testMapCarouselArrow = () => {
     // clickDisabled = false;
     const thumbImages = document.querySelectorAll('.thumb-map-img')
