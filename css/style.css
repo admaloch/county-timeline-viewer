@@ -271,6 +271,7 @@
 @media (min-width: 450px) {.year-container {top: 645px; width: 50%;}}
 @media (min-width: 500px) {.year-container {top: 820px; width: 50%;}}
 @media (min-width: 768px) {.year-container {top: 855px; width: 40%; }}
+@media (min-width: 992px) {.year-container {top: 950px; width: 40%; }}
 @media (min-width: 1017px) {.year-container {top: 1170px; width: 40%; height: 35% }}
 @media (min-width: 1200px) {.year-container {top: 1200px; width: 35%; height: 35% }}
 @media (min-width: 1500px) {.year-container {top: 1150px; height: 45% }}

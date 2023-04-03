@@ -12,29 +12,32 @@ import { addThumbImages } from "./modules/addThumbImages.js"
 const yearInput = document.querySelector('#year-search')
 const countySelect = document.querySelector('#county-select')
 data.county = counties[0].id
-
 let yearIndex = 0
-
-$(function () {
-    $('[data-toggle="popover"]').popover()
-})
-
 let imgNum = 4;
 
+// change thumb map num on screen change
 function changeImgNum() {
-
     if ($(window).width() > 1200) {
         imgNum = 5
+        console.log('it is 5')
     }
     else {
         imgNum = 4
+        console.log('it is 4')
     }
 }
+$(window).on("load", changeImgNum);
 $(window).on("resize", changeImgNum);
 
 
+console.log(imgNum)
 
 
+
+// bootstrap function for popover
+$(function () {
+    $('[data-toggle="popover"]').popover()
+})
 
 // loop to create items in the search by county select
 for (let i = 0; i < counties.length; i++) {
@@ -44,10 +47,9 @@ for (let i = 0; i < counties.length; i++) {
     countySelect.append(countySelectOption)
 }
 
-// event listener for search by county on change
+// search by county select - event listener on change
 countySelect.addEventListener('change', () => {
     data.county = countySelect.value
-
     yearInput.value = ''
     data.year = yearInput.value
     addCountyPeriodItems()
@@ -58,11 +60,10 @@ countySelect.addEventListener('change', () => {
     changeActiveImg()
     // document.getElementById('year-container').scrollIntoView();
     // setTimeout(() => {window.scrollBy(0, 850);}, 500);
-    $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 700);
+    $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 300);
 })
 
-
-// grab current county selected for interactive mapster plugin map
+// image mapster 'html mapped' florida mpa - change county when clicked on the map itself
 document.querySelectorAll('area').forEach(county => {
     county.addEventListener('click', () => {
         data.county = county.alt.replace('County', '').trim()
@@ -76,12 +77,12 @@ document.querySelectorAll('area').forEach(county => {
         addThumbImages(yearIndex, imgNum)
         changeActiveImg()
         // setTimeout(() => window.scrollBy(0, 850), 500);
-        $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 700);
+        $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 300);
     })
 
 })
 
-// interactive map arrows event listener - change county to next on list
+// image mapster 'html mapped' florida map - arrows event listener - change county to next/prev select item
 document.querySelectorAll('.map-arrows').forEach(arrow => {
     arrow.addEventListener('click', () => {
         if (arrow.id === 'prev-map-arrow') {
@@ -100,11 +101,11 @@ document.querySelectorAll('.map-arrows').forEach(arrow => {
         addThumbImages(yearIndex, imgNum)
         changeActiveImg()
         // setTimeout(() => window.scrollBy(0, 850), 500);
-        $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 700);
+        $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 300);
     })
 })
 
-// event listener for narrow by year input
+// narrow by year form input - change year on keyup after delay to smooth it out
 let timer;
 yearInput.addEventListener('keyup', function (e) {
     e.preventDefault()
@@ -115,7 +116,7 @@ yearInput.addEventListener('keyup', function (e) {
             data.year = yearInput.value;
         } else if (yearInput.value > 0 && yearInput.value <= currentYear) {
             data.year = parseInt(yearInput.value);
-            $('html, body').animate({ scrollTop: $("#county-timeline-header").offset().top }, 700);
+            $('html, body').animate({ scrollTop: $("#county-timeline-header").offset().top }, 300);
 
         } else {
             data.year = 0
@@ -142,8 +143,8 @@ yearInput.addEventListener('keyup', function (e) {
     }, 1000);
 });
 
+// reset button under narrow by year form - reset timeline and map to default
 document.querySelector('#reset-results-btn').addEventListener('click', () => {
-
     yearInput.value = ''
     data.year = yearInput.value
     addCountyPeriodItems()
@@ -153,7 +154,7 @@ document.querySelector('#reset-results-btn').addEventListener('click', () => {
     changeActiveImg()
 })
 
-// event listner for clicking a map thumbnail 
+// map carousel thumbnails - change active status on click for each
 const changeActiveImg = () => {
     const sliderImages = document.querySelectorAll('.thumb-map-img')
     sliderImages.forEach(img => {
@@ -172,9 +173,8 @@ const changeActiveImg = () => {
     })
 }
 
-// map image carousel event listner- change thumb images on arrow click
+// map carousel thumbnail arrows- add next/prev set of maps on next/prev arrow click
 document.querySelectorAll('.thumb-arrows').forEach(arrow => {
-
     let clickDisabled = false;
     arrow.addEventListener('click', () => {
         if (clickDisabled)
@@ -196,26 +196,27 @@ document.querySelectorAll('.thumb-arrows').forEach(arrow => {
         let currId = document.querySelectorAll('.thumb-map-img')[0].id
         updateCountyTimeline(currId)
         clickDisabled = true;
-        // setTimeout(function () { clickDisabled = false; }, 500);
+        setTimeout(function () { clickDisabled = false; }, 500);
     })
 })
 
+// side scroll arrows to ease transitions to diff sections
 document.querySelectorAll('.nav-arrows').forEach(arrow => {
     arrow.addEventListener('click', () => {
         if (arrow.id === 'nav-to-county') {
-            $('html, body').animate({ scrollTop: $(".county-title-container").offset().top }, 700);
-        } if (arrow.id === 'nav-to-map') {
-            $('html, body').animate({ scrollTop: $("#county-timeline-header").offset().top }, 700);
-        } if (arrow.id === 'nav-to-search') {
-            $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 700);
-        }
+            $('html, body').animate({ scrollTop: $(".county-title-container").offset().top }, 300);
+        } else {
+            $('html, body').animate({ scrollTop: $("#county-timeline-header").offset().top }, 300);
+        } 
     })
 })
 
-
-// openSeaViewerFunc(yearIndex)
-addThumbImages(yearIndex, imgNum)
 addCountyPeriodItems()
-changeActiveImg()
+// openSeaViewerFunc(yearIndex)
+setTimeout(() => {
+    addThumbImages(yearIndex, imgNum)
+    changeActiveImg()
+}, 100);
+
 testMapCarouselArrow()
 
