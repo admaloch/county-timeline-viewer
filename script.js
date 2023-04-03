@@ -7,8 +7,6 @@ import { updateHighlightedCounty } from "./imageMapster.js"
 import { testMapCarouselArrow } from "./modules/testMapCarouselArrow.js"
 import { addThumbImages } from "./modules/addThumbImages.js"
 
-// import { changeActiveImg } from "./modules/changeActiveImg.js"
-
 const yearInput = document.querySelector('#year-search')
 const countySelect = document.querySelector('#county-select')
 data.county = counties[0].id
@@ -28,11 +26,6 @@ function changeImgNum() {
 }
 $(window).on("load", changeImgNum);
 $(window).on("resize", changeImgNum);
-
-
-console.log(imgNum)
-
-
 
 // bootstrap function for popover
 $(function () {
@@ -58,8 +51,6 @@ countySelect.addEventListener('change', () => {
     yearIndex = 0
     addThumbImages(yearIndex, imgNum)
     changeActiveImg()
-    // document.getElementById('year-container').scrollIntoView();
-    // setTimeout(() => {window.scrollBy(0, 850);}, 500);
     $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 300);
 })
 
@@ -76,7 +67,6 @@ document.querySelectorAll('area').forEach(county => {
         yearIndex = 0
         addThumbImages(yearIndex, imgNum)
         changeActiveImg()
-        // setTimeout(() => window.scrollBy(0, 850), 500);
         $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 300);
     })
 
@@ -100,7 +90,6 @@ document.querySelectorAll('.map-arrows').forEach(arrow => {
         yearIndex = 0
         addThumbImages(yearIndex, imgNum)
         changeActiveImg()
-        // setTimeout(() => window.scrollBy(0, 850), 500);
         $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 300);
     })
 })
@@ -139,7 +128,13 @@ yearInput.addEventListener('keyup', function (e) {
         }
         testMapCarouselArrow()
         changeActiveImg()
-
+        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+            var viewportmeta = document.querySelector('meta[name="viewport"]');
+            if (viewportmeta) {
+                viewportmeta.setAttribute('content', 'width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0');
+                viewportmeta.setAttribute('content', 'width=device-width, minimum-scale=1.0, initial-scale=1.0');
+            }
+        }
     }, 1000);
 });
 
