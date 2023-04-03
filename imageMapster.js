@@ -83,7 +83,7 @@ resize(); // call once initially
 function resize2() {
 
     if ($(window).width() < 500) {
-        $('img').mapster('resize', 325, null);
+        $('img').mapster('resize', 300, null);
     }
 
 }
