@@ -119,7 +119,7 @@ export const counties = [
         [	"1823-07-03",	"1845-01-30",	"Mosquito",	"Laws 1844, \"An Act to Organize a County to be Called Marion County.\""	],
         [	"1844-03-14",	"Today",	"Marion",		]]
     },						
-    {"id":	"Saint Lucia",					
+    {"id":	"SLuciaaint ",					
         "periods": [[	"Ancestral Period",	"1513-04-02",	"",		],
         [	"1513-04-02",	"1763-02-10",	"La Florida",		],
         [	"1763-02-10",	"1783-09-03",	"British East Florida",		],
