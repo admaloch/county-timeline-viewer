@@ -2,7 +2,6 @@ export const data = {
     'year': '',
     'county': '',
     'countyArr': '',
-    imgNum: 4
+    'imgNum': 5
 }
 
-export let imgNum = 4

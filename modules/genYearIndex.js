@@ -3,6 +3,8 @@ import { addThumbImages } from "./addThumbImages.js";
 import { testMapCarouselArrow } from "./testMapCarouselArrow.js";
 import { data } from "./data.js";
 import { mapDatesArr } from "./mapData.js";
+import { changeActiveImg } from "./changeActiveImg.js";
+
 export const genYearIndex = (yearInput, yearIndex, imgNum) => {
     const currentYear = new Date().getFullYear()
     if (yearInput.length == 0) {
@@ -28,6 +30,7 @@ export const genYearIndex = (yearInput, yearIndex, imgNum) => {
         document.querySelectorAll('.thumb-map-img')[0].classList.add('active-img')
         document.querySelector('.active-img').nextElementSibling.classList.add('d-none')
     }
+    changeActiveImg()
     testMapCarouselArrow()
         
 }

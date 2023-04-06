@@ -2,6 +2,12 @@ import { formatDate } from "./formatDate.js"
 import { counties } from "./counties.js"
 import { data } from "./data.js"
 import { mapDatesArr } from "./mapData.js"
+import { genYearIndex } from "./genYearIndex.js"
+import { openSeaViewerFunc } from "./openSeaMapViewer.js"
+import { changeActiveImg } from "./changeActiveImg.js"
+import { addThumbImages } from "./addThumbImages.js"
+import { testMapCarouselArrow } from "./testMapCarouselArrow.js"
+
 
 const countyTimeline = document.querySelector('.county-timeline')
 const countyTimelineHeader = document.querySelector('#county-timeline-header')
@@ -10,7 +16,7 @@ const countySelect = document.querySelector('#county-select')
 const yearInput = document.querySelector('#year-search')
 
 // add items to ul timeline
-export const addCountyPeriodItems = () => {
+export const addCountyPeriodItems = (imgNum) => {
     countyTimeline.style.display = 'none'
     countyTimelineHeader.innerText = `${countySelect.value} county timeline:`
     const currCounty = counties.filter(x => x.id === countySelect.value)[0]
@@ -31,7 +37,7 @@ export const addCountyPeriodItems = () => {
             countyListItem.innerText = ''
         }
     }
-    grabListIndex()
+    listItemClickHandler()
     $(".county-timeline").fadeIn(1000);
 
 
@@ -44,20 +50,35 @@ export const updateCountyTimeline = (id) => {
     addCountyPeriodItems()
 }
 
-export const grabListIndex = () => {
-    document.querySelectorAll('.county-list-item').forEach(listItem => {
-        if (parseInt(listItem.id) >= 1820 || listItem.id.toLowerCase() === 'today') {
-            listItem.classList.add('make-clickable')
-            listItem.addEventListener('click', () => {
-                let listId = listItem.id
-                const currentYear = new Date().getFullYear()
-                listId.toLowerCase() === 'today'
-                    ? listId = currentYear
-                    : listId = parseInt(listId)
-                console.log(listId)
-            })
+const listItemClickHandler = (imgNum) => {
+    const listItems = document.querySelectorAll('.county-list-item')
+    if (listItems.length > 1) {
+        listItems.forEach(listItem => {
+            if (parseInt(listItem.id) >= 1820 || listItem.id.toLowerCase() === 'today') {
+                listItem.classList.add('make-clickable')
+                listItem.addEventListener('click', () => {
+                    let newYearStr = listItem.innerText.slice(0, 4)
+                    let newYear = parseInt(newYearStr)
+                    let yearIndex = 0
+                    for (let i = 0; i < mapDatesArr.length; i++) {
+                        if (newYear >= parseInt(mapDatesArr[i].slice(0, 4)))
+                            yearIndex = i;
+                    } if(yearIndex === 0) {
+                        yearIndex += 1
+                    }
+                    openSeaViewerFunc(yearIndex)
+                    addThumbImages(yearIndex - 1, 5)
+                    document.querySelectorAll('.thumb-map-img')[0].classList.add('active-img')
+                    document.querySelector('.active-img').nextElementSibling.classList.add('d-none')
+                    yearIndex = parseInt(document.querySelector('.active-img').id) - 1
+                    changeActiveImg()
+                    testMapCarouselArrow()
+                    $('html, body').animate({ scrollTop: $("#openseadragon1").offset().top }, 300);
+                })
+                
+            }
 
-        }
+        })
+    }
 
-    })
 }

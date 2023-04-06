@@ -3,6 +3,7 @@ import { mapDatesArr, imgAltArr } from "./mapData.js"
 // create map thumbnail image
 export const addThumbImages = (yearIndex, imgNum) => {
     const thumbMapContainer = document.querySelector('.thumb-img-container')
+    // console.log('this is the yearIndex ', yearIndex)
     thumbMapContainer.style.display = 'none'
 
     const thumbArr = genThumbArray(yearIndex, imgNum)

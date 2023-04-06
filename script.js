@@ -1,16 +1,18 @@
 import { counties } from "./modules/counties.js"
 import { data } from "./modules/data.js"
-import { mapDatesArr } from "./modules/mapData.js"
 import { addCountyPeriodItems, updateCountyTimeline } from "./modules/addCountyPeriodItems.js"
 import { openSeaViewerFunc } from "./modules/openSeaMapViewer.js"
 import { updateHighlightedCounty } from "./imageMapster.js"
 import { testMapCarouselArrow } from "./modules/testMapCarouselArrow.js"
 import { addThumbImages } from "./modules/addThumbImages.js"
-import { grabListIndex } from "./modules/addCountyPeriodItems.js"
+import { genYearIndex } from "./modules/genYearIndex.js"
+import { changeActiveImg } from "./modules/changeActiveImg.js"
 
 const yearInput = document.querySelector('#year-search')
 const countySelect = document.querySelector('#county-select')
+
 data.county = counties[0].id
+
 let yearIndex = 0
 let imgNum = 4;
 
@@ -18,11 +20,9 @@ let imgNum = 4;
 function changeImgNum() {
     if ($(window).width() > 1200) {
         imgNum = 5
-
     }
     else {
         imgNum = 4
-
     }
 }
 $(window).on("load", changeImgNum);
@@ -46,7 +46,8 @@ countySelect.addEventListener('change', () => {
     data.county = countySelect.value
     yearInput.value = ''
     data.year = yearInput.value
-    addCountyPeriodItems()
+    addCountyPeriodItems(imgNum)
+
     openSeaViewerFunc(0)
     updateHighlightedCounty(data.county)
     yearIndex = 0
@@ -62,7 +63,8 @@ document.querySelectorAll('area').forEach(county => {
         $("#county-select").selectpicker('val', data.county)
         yearInput.value = ''
         data.year = yearInput.value
-        addCountyPeriodItems()
+        addCountyPeriodItems(imgNum)
+
         openSeaViewerFunc(0)
         // copySelectionsToHiddenField()
         yearIndex = 0
@@ -85,7 +87,8 @@ document.querySelectorAll('.map-arrows').forEach(arrow => {
         data.year = yearInput.value
         $('.selectpicker').selectpicker('refresh')
         updateHighlightedCounty(data.county)
-        addCountyPeriodItems()
+        addCountyPeriodItems(imgNum)
+
         openSeaViewerFunc(0)
         yearIndex = 0
         addThumbImages(yearIndex, imgNum)
@@ -98,94 +101,45 @@ document.querySelectorAll('.map-arrows').forEach(arrow => {
 let timer;
 yearInput.addEventListener('keyup', function (e) {
     e.preventDefault()
+
     if (yearInput.value.length > 0 && yearInput.value.length <= 3) {
         clearTimeout(timer);
-        timer = setTimeout(() => {
-            genYearIndex(yearInput.value)
-            addCountyPeriodItems()
-        }, 2500);
+        timer = setTimeout(() => yearInputFunctions(), 2500);
     }
     if (yearInput.value.length === 4) {
         clearTimeout(timer);
-        timer = setTimeout(() => {
-            genYearIndex(yearInput.value)
-            addCountyPeriodItems()
-        }, 1300);
+        timer = setTimeout(() => yearInputFunctions(), 1300);
     }
 });
 
-
-
-
-
-
-
-
-const genYearIndex = (yearInput) => {
-    const currentYear = new Date().getFullYear()
-    if (yearInput.length == 0) {
-        data.year = yearInput;
-    } else if (yearInput > 0 && yearInput <= currentYear) {
-        data.year = parseInt(yearInput);
-        $('html, body').animate({ scrollTop: $("#county-timeline-header").offset().top }, 300);
-    } else {
-        data.year = 0
-    }
-    let yearInputNumber = parseInt(yearInput)
-    if (yearInputNumber >= 1820 && yearInputNumber <= currentYear) {
-        for (let i = 0; i < mapDatesArr.length; i++) {
-            if (yearInputNumber >= parseInt(mapDatesArr[i].slice(0, 4)))
-                yearIndex = i;
-        }
-    } else {
-        yearIndex = 0
-    }
-    openSeaViewerFunc(yearIndex)
-    addThumbImages(yearIndex - 1, imgNum)
-    if (yearInputNumber >= 1820 && yearInputNumber <= currentYear) {
-        document.querySelectorAll('.thumb-map-img')[0].classList.add('active-img')
-        document.querySelector('.active-img').nextElementSibling.classList.add('d-none')
-    }
-    testMapCarouselArrow()
-    changeActiveImg()
+const yearInputFunctions = () => {
+    genYearIndex(yearInput.value, yearIndex, imgNum)
+    addCountyPeriodItems(imgNum)
+    console.log(`this is the year index ${yearIndex} and this is the image num ${imgNum}`)
+    yearIndex = parseInt(document.querySelector('.active-img').id) - 1
 }
 
 // reset button under narrow by year form - reset timeline and map to default
 document.querySelector('#reset-results-btn').addEventListener('click', () => {
     yearInput.value = ''
     data.year = yearInput.value
-    addCountyPeriodItems()
+    addCountyPeriodItems(imgNum)
     openSeaViewerFunc(0)
     yearIndex = 0
+   
     addThumbImages(yearIndex, imgNum)
     changeActiveImg()
 })
 
-// map carousel thumbnails - change active status on click for each
-const changeActiveImg = () => {
-    const sliderImages = document.querySelectorAll('.thumb-map-img')
-    sliderImages.forEach(img => {
-        img.addEventListener('click', () => {
-            sliderImages.forEach(images => {
-                images.classList.remove('active-img')
-                images.nextElementSibling.classList.remove('d-none')
-            })
-            img.classList.add('active-img')
-            img.nextElementSibling.classList.add('d-none')
-
-            openSeaViewerFunc(img.id)
-            let currId = img.id
-            updateCountyTimeline(currId)
-        })
-    })
-}
-
 // map carousel thumbnail arrows- add next/prev set of maps on next/prev arrow click
 document.querySelectorAll('.thumb-arrows').forEach(arrow => {
+
     let clickDisabled = false;
     arrow.addEventListener('click', () => {
         if (clickDisabled)
             return;
+           
+        yearIndex = parseInt(document.querySelector('.active-img').id) - 1
         const thumbImages = document.querySelectorAll('.thumb-map-img')
         if (arrow.id === 'next-thumb-arrow' && thumbImages[thumbImages.length - 1].id !== '21') {
             yearIndex += 5
@@ -220,14 +174,12 @@ document.querySelectorAll('.nav-arrows').forEach(arrow => {
     })
 })
 
-addCountyPeriodItems()
+
+
+addCountyPeriodItems(imgNum)
 setTimeout(() => {
     openSeaViewerFunc(yearIndex)
     addThumbImages(yearIndex, imgNum)
     changeActiveImg()
     testMapCarouselArrow()
-
 }, 100);
-
-
-
