@@ -44,7 +44,7 @@
                 integrity="sha512-cYJB6HL8nB7eJAgDKzaTXXw3yFglIjbB3nE10dJfzC6P0z5Z5rBvcaJ7Tq5Nkp7dU3P9MwIGA5UMXTLIlIkFUQ=="
                 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <!-- main style sheets-->
-       
+
         <link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -377,11 +377,13 @@
                                                 <input id="year-search" type="text" placeholder="All years"
                                                         class="  form-control" id="inputSuccess">
                                         </form>
-                                        <div class="year-search-popup" data-container="body" data-toggle="popover"
-                                                data-placement="top" data-trigger="click"
-                                                title="Narrow the results............."
-                                                data-content="Narrow the results.............">
-                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                        <div>
+                                                <div id="year-search-popup" class="info-popup" data-container="body"
+                                                        data-toggle="popover" data-placement="top" data-trigger="click"
+                                                        title="Narrow the results by year etc.."
+                                                        data-content="year-search-popup">
+                                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                </div>
                                         </div>
 
                                 </div>
@@ -407,7 +409,7 @@
 
                                 <div class=" col-12  county-timeline text-center d-flex justify-content-center">
 
-                                        <div >
+                                        <div>
                                                 <h2 id="county-timeline-header"> </h2>
                                                 <ul id="county-timeline-list"></ul>
                                         </div>
@@ -416,8 +418,8 @@
 
                                 <!-- image carousel and slider thumbnails -->
                                 <div class="map-info-nav d-flex justify-content-end align-items-center  w-100">
-                                        <div class="  map-info-popup" data-container="body" data-toggle="popover"
-                                                data-placement="top" data-trigger="click"
+                                        <div id="map-info-popup" class="info-popup" data-container="body"
+                                                data-toggle="popover" data-placement="top" data-trigger="click"
                                                 title="This is a collection of maps dating back to 1820....."
                                                 data-content="This is a collection of maps dating back to 1820.....">
                                                 <i class="fa fa-info-circle" aria-hidden="true"></i>

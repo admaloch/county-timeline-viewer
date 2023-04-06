@@ -1,7 +1,10 @@
 export const data = {
-    'year': '',
+    
+    'year': '', //yearInputValue
+    'yearIndex': 0,
+    'imgNum': 5,
     'county': '',
-    'countyArr': '',
-    'imgNum': 5
+    'countyArr': [],
+    
 }
 

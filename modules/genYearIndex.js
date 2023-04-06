@@ -5,32 +5,32 @@ import { data } from "./data.js";
 import { mapDatesArr } from "./mapData.js";
 import { changeActiveImg } from "./changeActiveImg.js";
 
-export const genYearIndex = (yearInput, yearIndex, imgNum) => {
+export const genYearIndex = () => {
     const currentYear = new Date().getFullYear()
-    if (yearInput.length == 0) {
-        data.year = yearInput;
-    } else if (yearInput > 0 && yearInput <= currentYear) {
-        data.year = parseInt(yearInput);
+    if (data.year.length == 0) {
+        data.year = data.year;
+    } else if (data.year > 0 && data.year <= currentYear) {
+        data.year = parseInt(data.year);
         $('html, body').animate({ scrollTop: $("#county-timeline-header").offset().top }, 300);
     } else {
         data.year = 0
     }
-    let yearInputNumber = parseInt(yearInput)
+    let yearInputNumber = parseInt(data.year)
     if (yearInputNumber >= 1820 && yearInputNumber <= currentYear) {
         for (let i = 0; i < mapDatesArr.length; i++) {
             if (yearInputNumber >= parseInt(mapDatesArr[i].slice(0, 4)))
-                yearIndex = i;
+                data.yearIndex = i;
         }
     } else {
-        yearIndex = 0
+        data.yearIndex = 0
     }
-    openSeaViewerFunc(yearIndex)
-    addThumbImages(yearIndex - 1, imgNum)
+    openSeaViewerFunc(data.yearIndex)
+    addThumbImages()
     if (yearInputNumber >= 1820 && yearInputNumber <= currentYear) {
         document.querySelectorAll('.thumb-map-img')[0].classList.add('active-img')
         document.querySelector('.active-img').nextElementSibling.classList.add('d-none')
     }
     changeActiveImg()
     testMapCarouselArrow()
-        
+
 }

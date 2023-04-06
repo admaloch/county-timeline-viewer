@@ -1,4 +1,3 @@
-
 let image = $('#wpa_clickmap');
 
 // build area data from areas
@@ -12,8 +11,6 @@ let areas = $.map($('area[alt]'), function (el) {
 function copySelectionsToHiddenField() {
     $('#selectedKeys').val(image.mapster('get'));
 }
-
-
 
 image.mapster({
     fillOpacity: 0.3,
@@ -47,32 +44,12 @@ export const updateHighlightedCounty = (county) => {
             $('area.highlighted').mapster('set', true);
         }
     })
-
 }
 
-// $('img').mapster('resize', 800, null, 1000);
-
-// window.addEventListener('resize', () => {
-//     // Toggle on mobile
-//     if (window.innerWidth >= 996) {
-//         $('img').mapster('resize', 800, null, 100);
-//     }
-
-// });
-// window.addEventListener('resize', () => {
-//     // Toggle on mobile
-//     if (window.innerWidth < 996) {
-//         $('img').mapster('resize', 400, null, 100);
-//     }
-
-// });
-
 function resize() {
-
     if ($(window).width() < 992) {
         $('img').mapster('resize', 500, null);
     }
-
     else {
         $('img').mapster('resize', 900, null);
     }
@@ -85,7 +62,7 @@ function resize2() {
     if ($(window).width() < 500) {
         $('img').mapster('resize', 300, null);
     }
-
 }
+
 $(window).on("resize", resize2);
 resize2(); // call once initially

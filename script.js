@@ -11,20 +11,22 @@ import { changeActiveImg } from "./modules/changeActiveImg.js"
 const yearInput = document.querySelector('#year-search')
 const countySelect = document.querySelector('#county-select')
 
+
 data.county = counties[0].id
 
-let yearIndex = 0
-let imgNum = 4;
+// let yearIndex = 0
+// let imgNum = 4;
 
 // change thumb map num on screen change
 function changeImgNum() {
     if ($(window).width() > 1200) {
-        imgNum = 5
+        data.imgNum = 5
     }
     else {
-        imgNum = 4
+        data.imgNum = 4
     }
 }
+
 $(window).on("load", changeImgNum);
 $(window).on("resize", changeImgNum);
 
@@ -46,12 +48,12 @@ countySelect.addEventListener('change', () => {
     data.county = countySelect.value
     yearInput.value = ''
     data.year = yearInput.value
-    addCountyPeriodItems(imgNum)
+    addCountyPeriodItems()
 
     openSeaViewerFunc(0)
     updateHighlightedCounty(data.county)
-    yearIndex = 0
-    addThumbImages(yearIndex, imgNum)
+    data.yearIndex = 0
+    addThumbImages()
     changeActiveImg()
     $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 300);
 })
@@ -63,12 +65,12 @@ document.querySelectorAll('area').forEach(county => {
         $("#county-select").selectpicker('val', data.county)
         yearInput.value = ''
         data.year = yearInput.value
-        addCountyPeriodItems(imgNum)
+        addCountyPeriodItems()
 
         openSeaViewerFunc(0)
         // copySelectionsToHiddenField()
-        yearIndex = 0
-        addThumbImages(yearIndex, imgNum)
+        data.yearIndex = 0
+        addThumbImages()
         changeActiveImg()
         $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 300);
     })
@@ -87,11 +89,11 @@ document.querySelectorAll('.map-arrows').forEach(arrow => {
         data.year = yearInput.value
         $('.selectpicker').selectpicker('refresh')
         updateHighlightedCounty(data.county)
-        addCountyPeriodItems(imgNum)
+        addCountyPeriodItems()
 
         openSeaViewerFunc(0)
-        yearIndex = 0
-        addThumbImages(yearIndex, imgNum)
+        data.yearIndex = 0
+        addThumbImages()
         changeActiveImg()
         $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 300);
     })
@@ -101,33 +103,35 @@ document.querySelectorAll('.map-arrows').forEach(arrow => {
 let timer;
 yearInput.addEventListener('keyup', function (e) {
     e.preventDefault()
-
-    if (yearInput.value.length > 0 && yearInput.value.length <= 3) {
+    data.year = yearInput.value
+    if (data.year.length > 0 && data.year.length <= 3) {
         clearTimeout(timer);
         timer = setTimeout(() => yearInputFunctions(), 2500);
     }
-    if (yearInput.value.length === 4) {
+    if (data.year.length === 4) {
         clearTimeout(timer);
         timer = setTimeout(() => yearInputFunctions(), 1300);
     }
 });
 
+// yearinput event listner has diff. delays depending on input -
+// ex. if user puts in 18 it takes longer to trigger than 1845 as they may be thinking of how to finish teh date
+// this function just consolidates the code as the outcomes are the same for each delay
 const yearInputFunctions = () => {
-    genYearIndex(yearInput.value, yearIndex, imgNum)
-    addCountyPeriodItems(imgNum)
-    console.log(`this is the year index ${yearIndex} and this is the image num ${imgNum}`)
-    yearIndex = parseInt(document.querySelector('.active-img').id) - 1
+    genYearIndex()
+    addCountyPeriodItems()
+    // data.yearIndex = parseInt(document.querySelector('.active-img').id) - 1
 }
 
 // reset button under narrow by year form - reset timeline and map to default
 document.querySelector('#reset-results-btn').addEventListener('click', () => {
     yearInput.value = ''
     data.year = yearInput.value
-    addCountyPeriodItems(imgNum)
+    addCountyPeriodItems()
     openSeaViewerFunc(0)
-    yearIndex = 0
-   
-    addThumbImages(yearIndex, imgNum)
+    data.yearIndex = 0
+
+    addThumbImages()
     changeActiveImg()
 })
 
@@ -138,15 +142,16 @@ document.querySelectorAll('.thumb-arrows').forEach(arrow => {
     arrow.addEventListener('click', () => {
         if (clickDisabled)
             return;
-           
-        yearIndex = parseInt(document.querySelector('.active-img').id) - 1
+
+        data.yearIndex = parseInt(document.querySelectorAll('.thumb-map-img')[0].id) - 1
+        console.log(data.yearIndex)
         const thumbImages = document.querySelectorAll('.thumb-map-img')
         if (arrow.id === 'next-thumb-arrow' && thumbImages[thumbImages.length - 1].id !== '21') {
-            yearIndex += 5
-            addThumbImages(yearIndex, imgNum)
+            data.yearIndex += 5
+            addThumbImages()
         } if (arrow.id === 'prev-thumb-arrow' && thumbImages[0].id !== '1') {
-            yearIndex -= 5
-            addThumbImages(yearIndex, imgNum)
+            data.yearIndex -= 5
+            addThumbImages()
         }
         document.querySelectorAll('.thumb-map-img')[0].classList.add('active-img')
         changeActiveImg()
@@ -176,10 +181,18 @@ document.querySelectorAll('.nav-arrows').forEach(arrow => {
 
 
 
-addCountyPeriodItems(imgNum)
+
 setTimeout(() => {
-    openSeaViewerFunc(yearIndex)
-    addThumbImages(yearIndex, imgNum)
+    openSeaViewerFunc(data.yearIndex)
+    addCountyPeriodItems()
+    addThumbImages()
     changeActiveImg()
     testMapCarouselArrow()
+    
+
+
 }, 100);
+
+console.log(data.yearIndex)
+
+

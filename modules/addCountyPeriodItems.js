@@ -2,11 +2,11 @@ import { formatDate } from "./formatDate.js"
 import { counties } from "./counties.js"
 import { data } from "./data.js"
 import { mapDatesArr } from "./mapData.js"
-import { genYearIndex } from "./genYearIndex.js"
 import { openSeaViewerFunc } from "./openSeaMapViewer.js"
 import { changeActiveImg } from "./changeActiveImg.js"
 import { addThumbImages } from "./addThumbImages.js"
 import { testMapCarouselArrow } from "./testMapCarouselArrow.js"
+
 
 
 const countyTimeline = document.querySelector('.county-timeline')
@@ -16,7 +16,7 @@ const countySelect = document.querySelector('#county-select')
 const yearInput = document.querySelector('#year-search')
 
 // add items to ul timeline
-export const addCountyPeriodItems = (imgNum) => {
+export const addCountyPeriodItems = () => {
     countyTimeline.style.display = 'none'
     countyTimelineHeader.innerText = `${countySelect.value} county timeline:`
     const currCounty = counties.filter(x => x.id === countySelect.value)[0]
@@ -31,16 +31,38 @@ export const addCountyPeriodItems = (imgNum) => {
         countyListItem.id = endDate
         countyListItem.innerText = `${begDate} - ${endDate} - ${countyName}`
 
+        // bootstrap function for popover
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
         if (data.year !== 'null' && data.year == '' || begDate <= data.year && endDate >= data.year || begDate == 'Ancestral Period' && endDate >= data.year || begDate <= data.year && endDate == 'Today') {
-            countyTimelineList.append(countyListItem)
+            if (currCounty.periods[i][3]) {
+                let citation = currCounty.periods[i][3]
+                console.log(citation)
+                const citationContainer = document.createElement('div')
+                citationContainer.innerHTML = `
+                    <div id ="citation-popup" class="info-popup" data-container="body" data-toggle="popover"
+                        data-placement="left" data-trigger="click"
+                        title='${citation}'
+                        data-content="citation-popup">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </div>
+                    `
+                const itemContainer = document.createElement('div')
+                itemContainer.classList.add('d-flex', 'justify-content-center')
+                itemContainer.append(countyListItem)
+                itemContainer.append(citationContainer)
+
+                countyTimelineList.append(itemContainer)
+            } else {
+                countyTimelineList.append(countyListItem)
+            }
         } else {
             countyListItem.innerText = ''
         }
     }
     listItemClickHandler()
     $(".county-timeline").fadeIn(1000);
-
-
 }
 
 export const updateCountyTimeline = (id) => {
@@ -50,7 +72,7 @@ export const updateCountyTimeline = (id) => {
     addCountyPeriodItems()
 }
 
-const listItemClickHandler = (imgNum) => {
+const listItemClickHandler = () => {
     const listItems = document.querySelectorAll('.county-list-item')
     if (listItems.length > 1) {
         listItems.forEach(listItem => {
@@ -59,23 +81,32 @@ const listItemClickHandler = (imgNum) => {
                 listItem.addEventListener('click', () => {
                     let newYearStr = listItem.innerText.slice(0, 4)
                     let newYear = parseInt(newYearStr)
-                    let yearIndex = 0
+                    data.yearIndex = 0
                     for (let i = 0; i < mapDatesArr.length; i++) {
-                        if (newYear >= parseInt(mapDatesArr[i].slice(0, 4)))
-                            yearIndex = i;
-                    } if(yearIndex === 0) {
-                        yearIndex += 1
+                        if (newYear === parseInt(mapDatesArr[i].slice(0, 4))) {
+                            data.yearIndex = i;
+                        } else if (newYear > parseInt(mapDatesArr[i].slice(0, 4))) {
+                            data.yearIndex = i + 1;
+                        }
                     }
-                    openSeaViewerFunc(yearIndex)
-                    addThumbImages(yearIndex - 1, 5)
+                    
+                    if (data.yearIndex === 0) {
+                        data.yearIndex = 1
+                    }
+                    openSeaViewerFunc(data.yearIndex)
+                    // let currImgNum = data.imgNum
+                    // data.imgNum = 1
+                    
+                    addThumbImages()
+                    // data.imgNum = currImgNum
                     document.querySelectorAll('.thumb-map-img')[0].classList.add('active-img')
                     document.querySelector('.active-img').nextElementSibling.classList.add('d-none')
-                    yearIndex = parseInt(document.querySelector('.active-img').id) - 1
+                    // data.yearIndex = parseInt(document.querySelector('.active-img').id) - 1
                     changeActiveImg()
                     testMapCarouselArrow()
                     $('html, body').animate({ scrollTop: $("#openseadragon1").offset().top }, 300);
                 })
-                
+
             }
 
         })
