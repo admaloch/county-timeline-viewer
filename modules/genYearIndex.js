@@ -5,13 +5,15 @@ import { testMapCarouselArrow } from "./testMapCarouselArrow.js";
 import { data } from "./data.js";
 import { mapDatesArr } from "./mapData.js";
 import { changeActiveImg } from "./changeActiveImg.js";
+import { scrollFunc } from "./scroll-func.js";
+
 
 export const genYearIndex = () => {
     const currentYear = new Date().getFullYear()
     let yearInputNumber = parseInt(data.year)
     if (yearInputNumber > 0 && yearInputNumber <= currentYear) {
         data.year = yearInputNumber
-        $('html, body').animate({ scrollTop: $("#county-timeline-header").offset().top }, 300);
+        scrollFunc('#county-timeline-header', 700)
     } else {
         data.year = 0
     }

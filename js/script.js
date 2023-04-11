@@ -8,7 +8,8 @@ import { addThumbImages } from "../modules/addThumbImages.js"
 import { changeActiveImg } from "../modules/changeActiveImg.js"
 import { reset } from "../modules/reset.js"
 import { scrollFunc } from "../modules/scroll-func.js"
-import { yearInputFunctions } from "../modules/yearInputFunc.js"
+import { genYearIndex } from "../modules/genYearIndex.js"
+
 
 const yearInput = document.querySelector('#year-search')
 const countySelect = document.querySelector('#county-select')
@@ -43,7 +44,7 @@ countySelect.addEventListener('change', () => {
     data.county = countySelect.value
     updateHighlightedCounty(data.county)
     reset()
-    scrollFunc('#year-container', 300)
+    scrollFunc('#year-container', 700)
 })
 
 // image mapster 'html mapped' florida mpa - change county when clicked on the map itself
@@ -52,7 +53,7 @@ document.querySelectorAll('area').forEach(county => {
         data.county = county.alt.replace('County', '').trim()
         $("#county-select").selectpicker('val', data.county)
         reset()
-        scrollFunc('#year-container', 300)
+        scrollFunc('#year-container', 700)
     })
 })
 
@@ -66,7 +67,7 @@ document.querySelectorAll('.map-arrows').forEach(arrow => {
         $('.selectpicker').selectpicker('refresh')
         updateHighlightedCounty(data.county)
         reset()
-        scrollFunc('#year-container', 300)
+        scrollFunc('#year-container', 700)
     })
 })
 
@@ -88,19 +89,22 @@ yearInput.addEventListener('keyup', function (e) {
         formControl.classList.add('form-control-success')
         formControl.classList.remove('form-control-warning')
     }
-    if (data.year.length >= 1 && data.year.length <= 3) {
-        clearTimeout(timer);
-        timer = setTimeout(() => yearInputFunctions(), 2500);
-    } else if (data.year.length === 4) {
-        clearTimeout(timer);
-        timer = setTimeout(() => yearInputFunctions(), 1300);
-    } else if (data.year.length === 0) {
-        clearTimeout(timer);
-        timer = setTimeout(() => reset(), 700);
-    } else {
-        return
-    }
+
+    let timeOutNum = 0
+    if (data.year.length >= 1 && data.year.length <= 3) timeOutNum = 2500
+    else if (data.year.length === 4) timeOutNum = 1300
+    else if (data.year.length === 0) timeOutNum = 700
+    else return
+    console.log(timeOutNum)
+
+
+    setTimeout(() => {
+        genYearIndex()
+        addCountyPeriodItems()
+    }, timeOutNum)
 });
+
+
 
 // reset button under narrow by year form - reset timeline and map to default
 document.querySelector('#reset-results-btn').addEventListener('click', () => {
@@ -112,6 +116,7 @@ document.querySelectorAll('.thumb-arrows').forEach(arrow => {
 
     let clickDisabled = false;
     arrow.addEventListener('click', () => {
+        // sets short delay on arrows to prevent excessive clicking thru
         if (clickDisabled)
             return;
 
@@ -149,11 +154,12 @@ document.querySelectorAll('.thumb-arrows').forEach(arrow => {
 document.querySelectorAll('.nav-arrows').forEach(arrow => {
     arrow.addEventListener('click', () => {
         if (arrow.id === 'nav-to-county') {
-            $('html, body').animate({ scrollTop: $(".county-title-container").offset().top }, 0);
+            scrollFunc('.county-title-container', 500)
         } if (arrow.id === 'nav-to-map') {
-            $('html, body').animate({ scrollTop: $("#county-timeline-header").offset().top }, 0);
+            scrollFunc('#county-timeline-header', 500)
         } if (arrow.id === 'nav-to-search') {
-            $('html, body').animate({ scrollTop: $("#year-container").offset().top }, 0);
+            
+            scrollFunc('#year-container', 500)
         }
     })
 })
