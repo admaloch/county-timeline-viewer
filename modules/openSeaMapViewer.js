@@ -1,30 +1,5 @@
 import { mapCoords } from "./mapData.js";
 
-let mapArr = []
-for (let i = 0; i <= 21; i++) {
-    mapArr.push(
-        {
-            type: "legacy-image-pyramid",
-            levels: [
-                {
-                    url: "https://www.floridamemory.com/FMP/maps/small/fmc0001.jpg",
-                    width: 1000,
-                    height: 733
-                },
-                {
-                    url: "https://www.floridamemory.com/FMP/maps/medium/fmc0001.jpg",
-                    width: 2500,
-                    height: 1832
-                },
-                {
-                    url: "https://www.floridamemory.com/FMP/maps/large/fmc0001.jpg",
-                    width: 4962,
-                    height: 3636
-                }
-            ]
-        }
-    )
-}
 
 // initialize open sea dragon  map 
 var viewer = OpenSeadragon({
@@ -32,6 +7,7 @@ var viewer = OpenSeadragon({
     showNavigator: true,
     // sequenceMode: true,
     // showReferenceStrip: true,
+
     prefixUrl: "/openseadragon/images/",
     tileSources: [{
         type: "legacy-image-pyramid",
@@ -60,6 +36,7 @@ const mainOpenSeaDragon = document.querySelector('.openseadragon-container')
 
 // open sea dragon function to change map zoom cords based on 'narrow by year' input
 export const openSeaViewerFunc = (yearIndex) => {
+
     mainOpenSeaDragon.style.display = 'none'
     var tiledImage = viewer.world.getItemAt(0);
     let x = mapCoords[yearIndex].x

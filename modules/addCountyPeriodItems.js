@@ -7,8 +7,6 @@ import { changeActiveImg } from "./changeActiveImg.js"
 import { addThumbImages } from "./addThumbImages.js"
 import { testMapCarouselArrow } from "./testMapCarouselArrow.js"
 
-
-
 const countyTimeline = document.querySelector('.county-timeline')
 const countyTimelineHeader = document.querySelector('#county-timeline-header')
 const countyTimelineList = document.querySelector('#county-timeline-list')
@@ -38,15 +36,13 @@ export const addCountyPeriodItems = () => {
         if (data.year !== 'null' && data.year == '' || begDate <= data.year && endDate >= data.year || begDate == 'Ancestral Period' && endDate >= data.year || begDate <= data.year && endDate == 'Today') {
             if (currCounty.periods[i][3]) {
                 let citation = currCounty.periods[i][3]
-                console.log(citation)
+
                 const citationContainer = document.createElement('div')
                 citationContainer.innerHTML = `
-                    <div id ="citation-popup" class="info-popup" data-container="body" data-toggle="popover"
-                        data-placement="left" data-trigger="click"
-                        title='${citation}'
-                        data-content="citation-popup">
-                            <i class="fa fa-info-circle" aria-hidden="true"></i>
-                        </div>
+                    <i id="citation-popup" class="info-popup fa fa-info-circle"
+                    data-container="body" data-delay='{"show":"200"}' data-toggle="popover" data-html="true" data-placement="right"
+                    data-content="${citation}">
+                    </i>
                     `
                 const itemContainer = document.createElement('div')
                 itemContainer.classList.add('d-flex', 'justify-content-center')
@@ -74,6 +70,8 @@ export const updateCountyTimeline = (id) => {
 
 const listItemClickHandler = () => {
     const listItems = document.querySelectorAll('.county-list-item')
+    const timelineInfoPopup = document.getElementById('timeline-popup')
+    timelineInfoPopup.classList.remove('d-none')
     if (listItems.length > 1) {
         listItems.forEach(listItem => {
             if (parseInt(listItem.id) >= 1820 || listItem.id.toLowerCase() === 'today') {
@@ -89,27 +87,18 @@ const listItemClickHandler = () => {
                             data.yearIndex = i + 1;
                         }
                     }
-                    
-                    if (data.yearIndex === 0) {
-                        data.yearIndex = 1
-                    }
+                    if (data.yearIndex === 0) data.yearIndex = 1
                     openSeaViewerFunc(data.yearIndex)
-                    // let currImgNum = data.imgNum
-                    // data.imgNum = 1
-                    
-                    addThumbImages()
-                    // data.imgNum = currImgNum
+                    addThumbImages(data.yearIndex)
                     document.querySelectorAll('.thumb-map-img')[0].classList.add('active-img')
                     document.querySelector('.active-img').nextElementSibling.classList.add('d-none')
-                    // data.yearIndex = parseInt(document.querySelector('.active-img').id) - 1
                     changeActiveImg()
                     testMapCarouselArrow()
                     $('html, body').animate({ scrollTop: $("#openseadragon1").offset().top }, 300);
                 })
-
             }
-
         })
+    } else {
+        timelineInfoPopup.classList.add('d-none')
     }
-
-}
+} 

@@ -1,5 +1,5 @@
 import { updateCountyTimeline } from "./addCountyPeriodItems.js"
-import { data } from "./data.js"
+
 import { openSeaViewerFunc } from "./openSeaMapViewer.js"
 
 
@@ -17,7 +17,7 @@ export const changeActiveImg = () => {
             openSeaViewerFunc(img.id)
             let currId = img.id
             updateCountyTimeline(currId)
-            console.log(data.yearIndex)
+
         })
     })
 }
