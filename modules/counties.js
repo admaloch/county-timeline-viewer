@@ -510,7 +510,7 @@ export const counties = [
         [	"1905-05-24",	"1925-06-29",	"Saint Lucie",	"Laws 1925, Ch. 10148, &quotAn Act Providing for the Creation of Indian River County in the State of Florida, and for the Organization and Government Thereof.&quot"	],
         [	"1925-06-29",	"Today",	"Indian River",		]]
     },						
-    {"id":	"Martin",					
+    {"id": "Martin",					
         "periods": [[	"Ancestral Period",	"1513-04-02",	"Jaega Cheifdom",		],
         [	"1513-04-02",	"1763-02-10",	"La Florida",		],
         [	"1763-02-10",	"1783-09-03",	"British East Florida",		],

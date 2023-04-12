@@ -40,11 +40,12 @@ $('area.highlighted').mapster('set', true);
 export const updateHighlightedCounty = (county) => {
     $(".highlighted").css("display", "none");
     $("#wpa_map area").removeClass("highlighted");
+    
     document.querySelectorAll('area').forEach(x => {
-        if (x.alt.split(' ')[0].toLowerCase() === county.toLowerCase()) {
+        if (x.alt.trim() === county.trim()) {
             x.classList.add('highlighted')
             $('area.highlighted').mapster('set', true);
-        }
+        } 
     })
 }
 
@@ -65,3 +66,6 @@ resize400()
 resize576()
 resize768()
 resize1200()
+
+
+

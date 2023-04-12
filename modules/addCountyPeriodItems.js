@@ -14,6 +14,8 @@ const countyTimelineList = document.querySelector('#county-timeline-list')
 const countySelect = document.querySelector('#county-select')
 const yearInput = document.querySelector('#year-search')
 
+
+
 // add items to ul timeline
 export const addCountyPeriodItems = () => {
     countyTimeline.style.display = 'none'
@@ -25,10 +27,12 @@ export const addCountyPeriodItems = () => {
         let begDate = formatDate(currCounty.periods[i][0])
         let endDate = formatDate(currCounty.periods[i][1])
         let countyName = currCounty.periods[i][2]
-        const countyListItem = document.createElement('li')
-        countyListItem.classList.add('county-list-item')
-        countyListItem.id = endDate
-        countyListItem.innerText = `${begDate} - ${endDate} - ${countyName}`
+        let countyListItem = document.createElement('div')
+        countyListItem.classList.add('d-flex', 'justify-content-center')
+        countyListItem.innerHTML = `
+        <li class="county-list-item" id='${endDate}'>${begDate} - ${endDate} - ${countyName}</li>
+        `
+
 
         // bootstrap function for popover
         $(function () {

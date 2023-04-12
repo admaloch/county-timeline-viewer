@@ -2,7 +2,7 @@ html {
     font-size: .7em;
 }
 
-html, body {
+body {
     max-width: 100%;
     overflow-x: hidden;
 }
@@ -309,8 +309,8 @@ ul {
 }
 
 .popover-body {
-    max-height: 150px;
-    max-width: 250px;
+    max-height: 200px;
+    max-width: 100px;
     overflow-y: auto;
     white-space: pre-wrap;
 }
@@ -359,6 +359,9 @@ ul {
     .interactive-map-container {
         margin-bottom: -18em
     }
+    .popover-body {
+        max-width: 150px;
+    }
 }
 @media (min-width: 768px) {
     html {
@@ -389,6 +392,9 @@ ul {
     }
     .interactive-map-container {
         margin-bottom: -12em
+    }
+    .popover-body {
+        max-width: 250px;
     }
 }
 

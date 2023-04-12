@@ -14,18 +14,6 @@ import { genYearIndex } from "../modules/genYearIndex.js"
 const yearInput = document.querySelector('#year-search')
 const countySelect = document.querySelector('#county-select')
 
-// data.county = counties[0].id
-
-// change thumb map num on screen change
-function changeImgNum() {
-    $(window).width() > 1200
-        ? data.imgNum = 5
-        : data.imgNum = 4
-}
-
-$(window).on("load", changeImgNum);
-$(window).on("resize", changeImgNum);
-
 // bootstrap function for popover
 $(function () {
     $('[data-toggle="popover"]').popover()
@@ -113,19 +101,10 @@ yearInput.addEventListener('keyup', function (e) {
     setTimeout(() => {
         genYearIndex()
         addCountyPeriodItems()
-        
+
     }, timeOutNum)
 });
 
-yearInput.addEventListener('blur', function (e) {
-    if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
-        var viewportmeta = document.querySelector('meta[name="viewport"]');
-        if (viewportmeta) {
-            viewportmeta.setAttribute('content', 'width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0');
-            viewportmeta.setAttribute('content', 'width=device-width, minimum-scale=1.0, initial-scale=1.0');
-        }
-    }
-})
 
 // reset button under narrow by year form - reset timeline and map to default
 document.querySelector('#reset-results-btn').addEventListener('click', () => {
@@ -182,6 +161,17 @@ document.querySelectorAll('.nav-arrows').forEach(arrow => {
     })
 })
 
+// change thumb map num on screen change
+// function changeImgNum() {
+//     $(window).width() > 1200
+//         ? data.imgNum = 5
+//         : data.imgNum = 4
+//     addThumbImages(data.yearIndex)
+// }
+
+// $(window).on("load", changeImgNum);
+// $(window).on("resize", changeImgNum);
+
 setTimeout(() => {
     openSeaViewerFunc(data.yearIndex)
     addCountyPeriodItems()
@@ -189,3 +179,28 @@ setTimeout(() => {
     changeActiveImg()
     testMapCarouselArrow()
 }, 100);
+
+
+// change map thumbnail on smaller screen
+var resizeTimer;
+$(window).on('load resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+        const activeImg = document.querySelector('.active-img')
+        if (activeImg) {
+            data.yearIndex = activeImg.id - 1
+        }
+        if ($(window).width() > 1200) {
+            data.imgNum = 5
+        } else {
+            data.imgNum = 4
+        }
+        addThumbImages(data.yearIndex)
+        changeActiveImg()
+        testMapCarouselArrow()
+        const thumbImage = document.querySelector('.thumb-map-img')
+        if (thumbImage.id !== '1') {
+            thumbImage.classList.add('active-img')
+        }
+    }, 300);
+});
