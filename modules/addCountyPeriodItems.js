@@ -41,7 +41,7 @@ export const addCountyPeriodItems = () => {
                 const citationContainer = document.createElement('div')
                 citationContainer.innerHTML = `
                     <i id="citation-popup" class="info-popup fa fa-info-circle"
-                    data-container="body" data-delay='{"show":"200"}' data-toggle="popover" data-html="true" data-placement="right"
+                    data-container="body" data-delay='{"show":"200"}' data-toggle="popover" data-html="true" data-placement="top"
                     data-content="${citation}">
                     </i>
                     `

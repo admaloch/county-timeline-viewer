@@ -1,25 +1,11 @@
 html {
-    font-size: .8em;
+    font-size: .5em;
 }
 
-@media (min-width: 451px) {
-    html {
-        font-size: 1.2em;
-    }
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
 }
-
-@media (min-width: 576px) {
-    html {
-        font-size: 1.4em;
-    }
-}
-
-@media (min-width: 5768px) {
-    html {
-        font-size: 1.5em;
-    }
-}
-
 
 .content-container {
     width: 100%;
@@ -31,38 +17,22 @@ html {
     width: 100%;
 }
 
+body
+
 .county-title-container {
     border-bottom: black solid 1px;
-    padding: 50px 0;
+    padding: 20px 0;
 }
-
-
-
-
-
-
 
 .county-timeline {
     padding-top: 45%;
-    padding-bottom: 10%;
+    padding-bottom: 3%;
     border-top: black solid 2px;
 }
 
-@media (min-width: 997px) {
-    .county-timeline {
-        padding-top: 35%;
-        padding-bottom: 10%;
-    }
-}
 
-/* @media (min-width: 997px) {
-    .county-timeline {
-        padding-top: 13em;
-        padding-bottom: 4em;
-    }
-} */
-*/ .timeline-box {
 
+.timeline-box {
     padding: 80px 0;
     -webkit-box-shadow: 0px 0px 44px 2px rgba(0, 0, 0, 0.12);
     box-shadow: 0px 0px 44px 2px rgba(0, 0, 0, 0.12);
@@ -76,8 +46,6 @@ html {
 #county-timeline-list {
     list-style-type: none
 }
-
-
 
 .map-arrows {
     cursor: pointer;
@@ -93,45 +61,31 @@ html {
     background-color: lightgrey;
 }
 
-/* .temporary-map {
-    width: 700px;
-} */
-
 ul {
     padding-left: 0;
 }
 
-
-
-
-
- .form-control-success:focus {
+.form-control-success:focus {
     border-color: #bde0fe;
-    -webkit-box-shadow: 0px 0px 15px 3px rgba(189,224,254,0.47); 
-    box-shadow: 0px 0px 15px 3px rgba(189,224,254,0.47);
-  }  
-
-  .form-control-warning:focus {
-    border-color: #D90429;
-
-    box-shadow: 0px 0px 15px 3px rgba(217,4,41,0.47);
-  }   
-
-  .map-sizing {
-    width: 100%;
-    margin-bottom: 4em;
-  }
-
-  @media (min-width: 768px) {
-    .map-sizing {
-        width: 75%;
-        margin-bottom: 0;
-      }
+    -webkit-box-shadow: 0px 0px 15px 3px rgba(189, 224, 254, 0.47);
+    box-shadow: 0px 0px 15px 3px rgba(189, 224, 254, 0.47);
 }
 
+.form-control-warning:focus {
+    border-color: #D90429;
+
+    box-shadow: 0px 0px 15px 3px rgba(217, 4, 41, 0.47);
+}
+
+.map-sizing {
+    width: 100%;
+    margin-bottom: 4em;
+    border: black solid 2px;
+}
+
+
+
 .main-map {
-
-
     width: 100%;
     aspect-ratio: 23/17;
     -webkit-box-shadow: 0px 0px 58px 2px rgba(0, 0, 0, 0.15);
@@ -140,28 +94,15 @@ ul {
 
 #map-info-popup {
     position: relative;
-    
 }
 
 #citation-popup {
     margin-left: 10px;
-
 }
 
-@media (min-width: 768px) {
-    #map-info-popup {
-        right: 3em;
-    }
-}
 
-@media (min-width: 1200px) {
-    #map-info-popup {
-        right: 5em;
-    }
-}
 
 .thumb-content {
-    border: red solid 2px;
     margin: 0 auto;
     width: 100%;
 }
@@ -172,19 +113,12 @@ ul {
     min-width: 20px;
 }
 
-@media (min-width: 1200px) {
-    .thumb-content {
-        width: 85%
-    }
-}
 
 
 .carousel-container {
     width: 52%;
     height: 79%;
-}  
-
-
+}
 
 .thumb-map-img {
     opacity: .5;
@@ -207,18 +141,14 @@ ul {
     box-shadow: 0px 0px 58px 2px rgba(0, 0, 0, 0.15);
 }
 
-
 .thumb-text {
     position: relative;
     text-align: center;
-    /* bottom: 63px; */
     opacity: .3;
     color: black;
     background-color: #dad7cd;
     pointer-events: none;
-
 }
-
 
 .slider-img {
     height: 100px;
@@ -350,67 +280,21 @@ ul {
     top: 27px;
 }
 
-
-
 .interactive-map-container {
-    margin-bottom: -11em
+    margin-bottom: -18em
 }
 
 .year-container {
     position: relative;
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     padding: 50px 0px;
     z-index: 100;
     background-color: white;
-    top: 180px;
+    top: 150px;
     -webkit-box-shadow: 0px 0px 44px 2px rgba(0, 0, 0, 0.12);
     box-shadow: 0px 0px 44px 2px rgba(0, 0, 0, 0.12);
     border-radius: 50%;
-}
-
-
-@media (min-width: 451px) {
-    .year-container {
-        top: 210px;
-        width: 300px;
-        height: 300px;
-    }
-}
-
-@media (min-width: 576px) {
-    .year-container {
-        top: 260px;
-        width: 350px;
-        height: 350px;
-    }
-}
-
-@media (min-width: 768px) {
-    .year-container {
-        top: 285px;
-        width: 400px;
-        height: 400px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .year-container {
-        top: 355px;
-        width: 550px;
-        height: 550px;
-    }
-}
-
-@media (min-width: 576px) {
-    .nav-arrows {
-        font-size: 30px;
-        padding: 5px 5px;
-    }
-
-    .year-arrows {
-        top: 41px;
-    }
 }
 
 .delete-icon,
@@ -423,3 +307,109 @@ ul {
     cursor: pointer;
     color: lightgray;
 }
+
+.popover-body {
+    max-height: 150px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
+
+
+/* media queries */
+@media (min-width: 400px) {
+   
+    .year-container {
+        top: 175px;
+        width: 250px;
+        height: 250px;
+    }
+
+}
+@media (min-width: 451px) {
+    html {
+        font-size: .8em;
+    }
+    .year-container {
+        top: 200px;
+        width: 300px;
+        height: 300px;
+    }
+
+    .interactive-map-container {
+        margin-bottom: -15em
+    }
+}
+@media (min-width: 576px) {
+    html {
+        font-size: .8em;
+    }
+    .nav-arrows {
+        font-size: 30px;
+        padding: 5px 5px;
+    }
+    .year-arrows {
+        top: 41px;
+    }
+    .year-container {
+        top: 260px;
+        width: 350px;
+        height: 350px;
+    }
+    .interactive-map-container {
+        margin-bottom: -18em
+    }
+}
+@media (min-width: 768px) {
+    html {
+        font-size: 1em;
+    }
+
+    .year-container {
+        top: 285px;
+        width: 400px;
+        height: 400px;
+    }
+    #map-info-popup {
+        right: 3em;
+    }
+    .map-sizing {
+        width: 75%;
+        margin-bottom: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    html {
+        font-size: 1.2em;
+    }
+    .county-timeline {
+        padding-top: 35%;
+        padding-bottom: 10%;
+    }
+    .interactive-map-container {
+        margin-bottom: -12em
+    }
+}
+
+@media (min-width: 1200px) {
+    html {
+        font-size: 1.5em;
+    }
+    .year-container {
+        top: 355px;
+        width: 550px;
+        height: 550px;
+    }
+    .thumb-content {
+        width: 85%
+    }
+    #map-info-popup {
+        right: 5em;
+    }
+    .interactive-map-container {
+        margin-bottom: -15em
+    }
+}
+
+
+

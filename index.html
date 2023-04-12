@@ -23,6 +23,7 @@
         <script src="files/bootstrap-select-js.min.js"></script>
         <script src="files/jquery.imagemapster.min.js"></script>
         <script src="files/openseadragon.min.js"></script>
+        <script src="files/imageMapResizer.min.js"></script>
         <!-- main js files -->
         <script type="module" src="./js/activate-image-mapster.js"></script>
         <script type="module" src="./js/script.js"></script>
@@ -63,12 +64,9 @@
                                         <div class=" arrow-icon-container text-center">
                                                 <i class="fa fa-arrow-right next-map-icon"></i>
                                         </div>
-
                                 </div>
-
-
-
                         </div>
+                        
                         <!-- interactive map row -->
                         <div class="row  interactive-map-container   d-flex justify-content-center align-items-center">
                                 <div class="col-12 interactive-map text-center">
@@ -359,7 +357,7 @@
                                         </form>
 
                                         <i id="year-search-popup" class="info-popup fa fa-info-circle"
-                                                data-container="body" data-toggle="popover" data-placement="right"
+                                                data-container="body" data-toggle="popover" data-placement="top"
                                                 data-delay='{"show":"200"}'
                                                 data-content="Pick a year to see what the selected county looked like at the time. e.g. 1845.">
                                         </i>
@@ -396,7 +394,7 @@
 
                                                 <i id="timeline-popup" class="info-popup fa fa-info-circle"
                                                         data-container="body" data-toggle="popover"
-                                                        data-delay='{"show":"200"}' data-placement="right"
+                                                        data-delay='{"show":"200"}' data-placement="top"
                                                         data-content="Click a timeline item to view a map from that era. Note: The earliest map dates back to the year 1820.">
                                                 </i>
                                         </div>
@@ -429,7 +427,7 @@
 
 
                                 <div
-                                        class=" border w-100  mt-3 d-none d-md-block mb-5">
+                                        class="  w-100  mt-3 d-none d-md-block mb-5">
                                         <div class="d-flex thumb-content  justify-content-evenly align-items-center">
                                                 <div id="prev-thumb-arrow" class="thumb-arrows col-1 text-center"><i
                                                                 class="fa fa-arrow-left thumb-icons prev-thumb-icon"></i>

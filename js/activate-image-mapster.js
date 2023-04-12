@@ -48,23 +48,20 @@ export const updateHighlightedCounty = (county) => {
     })
 }
 
-function resize() {
-    if ($(window).width() < 992) {
-        $('img').mapster('resize', 500, null);
-    }
-    else {
-        $('img').mapster('resize', 900, null);
-    }
-}
-$(window).on("resize", resize);
-resize(); // call once initially
+const resize300 = () => { if ($(window).width() > 250) $('img').mapster('resize', 250, null) }
+const resize400 = () => { if ($(window).width() > 400) $('img').mapster('resize', 350, null) }
+const resize576 = () => { if ($(window).width() > 576) $('img').mapster('resize', 450, null) }
+const resize768 = () => { if ($(window).width() > 768) $('img').mapster('resize', 600, null) }
+const resize1200 = () => { if ($(window).width() > 1200) $('img').mapster('resize', 850, null) }
 
-function resize2() {
+$(window).on("resize", resize300);
+$(window).on("resize", resize400);
+$(window).on("resize", resize576);
+$(window).on("resize", resize768);
+$(window).on("resize", resize1200);
 
-    if ($(window).width() < 500) {
-        $('img').mapster('resize', 300, null);
-    }
-}
-
-$(window).on("resize", resize2);
-resize2(); // call once initially
+resize300()
+resize400()
+resize576()
+resize768()
+resize1200()

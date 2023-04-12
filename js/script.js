@@ -31,6 +31,21 @@ $(function () {
     $('[data-toggle="popover"]').popover()
 })
 
+// hide popover on scroll
+window.addEventListener('scroll', function () {
+    $("[data-toggle='popover']").popover('hide');
+});
+// hide popover when screen clicked
+window.onload = function () {
+    document.addEventListener("click", function (event) {
+        // if the clicked element isn't child of the navbar, you must close it if is open
+        if (!event.target.closest("[data-toggle='popover']")) {
+            $("[data-toggle='popover']").popover('hide');
+        }
+    });
+}
+
+
 // loop to create items in the search by county select
 for (let i = 0; i < counties.length; i++) {
     const countySelectOption = document.createElement('option')
@@ -89,14 +104,11 @@ yearInput.addEventListener('keyup', function (e) {
         formControl.classList.add('form-control-success')
         formControl.classList.remove('form-control-warning')
     }
-
     let timeOutNum = 0
     if (data.year.length >= 1 && data.year.length <= 3) timeOutNum = 2500
     else if (data.year.length === 4) timeOutNum = 1300
     else if (data.year.length === 0) timeOutNum = 700
     else return
-    console.log(timeOutNum)
-
 
     setTimeout(() => {
         genYearIndex()
@@ -119,9 +131,7 @@ document.querySelectorAll('.thumb-arrows').forEach(arrow => {
         // sets short delay on arrows to prevent excessive clicking thru
         if (clickDisabled)
             return;
-
         data.yearIndex = parseInt(document.querySelectorAll('.thumb-map-img')[0].id) - 1
-
         const thumbImages = document.querySelectorAll('.thumb-map-img')
         var container = document.getElementById("thumb-img-container");
         var numberOfChildren = container.children.length
@@ -158,7 +168,6 @@ document.querySelectorAll('.nav-arrows').forEach(arrow => {
         } if (arrow.id === 'nav-to-map') {
             scrollFunc('#county-timeline-header', 500)
         } if (arrow.id === 'nav-to-search') {
-            
             scrollFunc('#year-container', 500)
         }
     })
@@ -171,5 +180,3 @@ setTimeout(() => {
     changeActiveImg()
     testMapCarouselArrow()
 }, 100);
-
-
