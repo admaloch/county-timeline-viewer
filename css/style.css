@@ -1,5 +1,5 @@
 html {
-    font-size: .5em;
+    font-size: .7em;
 }
 
 html, body {
@@ -281,7 +281,7 @@ ul {
 }
 
 .interactive-map-container {
-    margin-bottom: -18em
+    margin-bottom: -13em
 }
 
 .year-container {
@@ -310,6 +310,7 @@ ul {
 
 .popover-body {
     max-height: 150px;
+    max-width: 250px;
     overflow-y: auto;
     white-space: pre-wrap;
 }
@@ -341,7 +342,7 @@ ul {
 }
 @media (min-width: 576px) {
     html {
-        font-size: .8em;
+        font-size: .9em;
     }
     .nav-arrows {
         font-size: 30px;
