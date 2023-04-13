@@ -10,7 +10,6 @@ import { reset } from "../modules/reset.js"
 import { scrollFunc } from "../modules/scroll-func.js"
 import { genYearIndex } from "../modules/genYearIndex.js"
 
-
 const yearInput = document.querySelector('#year-search')
 const countySelect = document.querySelector('#county-select')
 
@@ -32,7 +31,6 @@ window.onload = function () {
         }
     });
 }
-
 
 // loop to create items in the search by county select
 for (let i = 0; i < counties.length; i++) {
@@ -101,10 +99,8 @@ yearInput.addEventListener('keyup', function (e) {
     setTimeout(() => {
         genYearIndex()
         addCountyPeriodItems()
-
     }, timeOutNum)
 });
-
 
 // reset button under narrow by year form - reset timeline and map to default
 document.querySelector('#reset-results-btn').addEventListener('click', () => {
@@ -161,7 +157,6 @@ document.querySelectorAll('.nav-arrows').forEach(arrow => {
     })
 })
 
-
 setTimeout(() => {
     openSeaViewerFunc(data.yearIndex)
     addCountyPeriodItems()
@@ -169,7 +164,6 @@ setTimeout(() => {
     changeActiveImg()
     testMapCarouselArrow()
 }, 100);
-
 
 // change map thumbnail on smaller screen
 var resizeTimer;
