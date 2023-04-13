@@ -161,16 +161,6 @@ document.querySelectorAll('.nav-arrows').forEach(arrow => {
     })
 })
 
-// change thumb map num on screen change
-// function changeImgNum() {
-//     $(window).width() > 1200
-//         ? data.imgNum = 5
-//         : data.imgNum = 4
-//     addThumbImages(data.yearIndex)
-// }
-
-// $(window).on("load", changeImgNum);
-// $(window).on("resize", changeImgNum);
 
 setTimeout(() => {
     openSeaViewerFunc(data.yearIndex)
@@ -192,8 +182,10 @@ $(window).on('load resize', function () {
         }
         if ($(window).width() > 1200) {
             data.imgNum = 5
-        } else {
+        } else if ($(window).width() > 768) {
             data.imgNum = 4
+        } else {
+            data.imgNum = 3
         }
         addThumbImages(data.yearIndex)
         changeActiveImg()

@@ -17,7 +17,7 @@ body {
     width: 100%;
 }
 
-body
+
 
 .county-title-container {
     border-bottom: black solid 1px;
@@ -79,7 +79,7 @@ ul {
 
 .map-sizing {
     width: 100%;
-    margin-bottom: 4em;
+    /* margin-bottom: 4em; */
     border: black solid 2px;
 }
 
@@ -318,7 +318,7 @@ ul {
 
 /* media queries */
 @media (min-width: 400px) {
-   
+
     .year-container {
         top: 175px;
         width: 250px;
@@ -326,10 +326,12 @@ ul {
     }
 
 }
+
 @media (min-width: 451px) {
     html {
         font-size: .8em;
     }
+
     .year-container {
         top: 200px;
         width: 300px;
@@ -340,29 +342,41 @@ ul {
         margin-bottom: -15em
     }
 }
+
 @media (min-width: 576px) {
     html {
         font-size: .9em;
     }
+
     .nav-arrows {
         font-size: 30px;
         padding: 5px 5px;
     }
+
     .year-arrows {
         top: 41px;
     }
+
     .year-container {
         top: 260px;
         width: 350px;
         height: 350px;
     }
+
     .interactive-map-container {
         margin-bottom: -18em
     }
+
     .popover-body {
         max-width: 150px;
     }
+
+    .map-sizing {
+
+        margin-bottom: 0;
+    }
 }
+
 @media (min-width: 768px) {
     html {
         font-size: 1em;
@@ -373,12 +387,14 @@ ul {
         width: 400px;
         height: 400px;
     }
+
     #map-info-popup {
         right: 3em;
     }
+
     .map-sizing {
         width: 75%;
-        margin-bottom: 0;
+
     }
 }
 
@@ -386,13 +402,16 @@ ul {
     html {
         font-size: 1.2em;
     }
+
     .county-timeline {
         padding-top: 35%;
         padding-bottom: 10%;
     }
+
     .interactive-map-container {
         margin-bottom: -12em
     }
+
     .popover-body {
         max-width: 250px;
     }
@@ -402,21 +421,23 @@ ul {
     html {
         font-size: 1.5em;
     }
+
     .year-container {
         top: 355px;
         width: 550px;
         height: 550px;
     }
+
     .thumb-content {
         width: 85%
     }
+
     #map-info-popup {
         right: 5em;
     }
+
     .interactive-map-container {
         margin-bottom: -15em
     }
 }
-
-
 
